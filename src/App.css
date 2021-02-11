@@ -224,6 +224,10 @@ opacity: 1;
   font-weight: 500;
 }
 
+.payment-done{
+  text-align: center;
+}
+
 .orders-title{
   text-align: left;
   font-size: xx-large;

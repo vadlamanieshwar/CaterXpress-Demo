@@ -5,13 +5,16 @@ export const addItems = ( state, action) => {
     state.push(action.payload);
 }
 
+const initialState = [];
+
 const items = createSlice({
 
   name         : "items",
   initialState : [],
   reducers     : {
 
-    addItems : addItems
+    addItems : addItems,
+    removeItems : () => {return initialState}
 
   }
   

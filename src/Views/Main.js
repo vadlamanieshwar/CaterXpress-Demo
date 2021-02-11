@@ -7,6 +7,7 @@ import StarOutlineIcon from '@material-ui/icons/StarOutline';
 // import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
@@ -54,7 +55,13 @@ const useStyles = makeStyles((theme) => ({
         font: "normal normal normal 26px/31px SF Pro",
         letterSpacing: "0px",
         color: "#19222A",
-        padding: "10px 20px"
+        padding: "10px 20px",
+      },
+      viweAllChip:{
+        background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box",
+        borderRadius: 36,
+        padding: "10px 20px",
+        color: "white"
       },
       starColor: {
           color: "#E87803"
@@ -178,14 +185,23 @@ const Filter = (props) => {
                     <Button className={classes.chip} variant="outlined">Under 30 min</Button>
                     <Button className={classes.chip} variant="outlined">Vegetarian</Button>
                     <Button className={classes.chip} variant="outlined" endIcon={<ArrowDropDownCircleSharpIcon />}>$$$</Button>
-                    <Button className={classes.chip} variant="outlined">New</Button>
+                    <Button className={classes.chip} variant="outlined"
+                    onClick={()=>{
+                        if(props.sel && props.filter !== "rate"){
+                            props.setFilter({filter:"rate",sel:props.sel});
+                        }
+                        else{
+                            props.setFilter({filter:"rate",sel:!props.sel});
+                        }
+                    }} 
+                    >New</Button>
                     <Button className={classes.chip} variant="outlined">Group Order</Button>
                 </div>
                 
     );
 }
 
-const MainMenu = () => {
+const MainMenu = ( props ) => {
     const [menu, setMenu] = useState(Menu.data);
     const classes = useStyles();
 
@@ -197,7 +213,13 @@ const MainMenu = () => {
                     <div className="cat-title-cont">  
                         <div className="cat-title">{cat.category}</div>
                         <div className="cat-buttons">
-                            <Button className={classes.chip} variant="outlined">View All</Button>
+                            {/* <Link to="/viewall"> */}
+                                <Button className={classes.viweAllChip} variant="outlined"
+                                    onClick={()=>{
+                                        props.setFilter({filter:"rate",sel:!props.sel})
+                                    }}
+                                >View All</Button>
+                            {/* </Link> */}
                             <ArrowBackIcon className={classes.optChange}/>
                             <ArrowForwardIcon className={classes.optChange} />
                         </div>
@@ -277,19 +299,9 @@ const Main = () => {
             <Ad />
             
             <div className="food-sec-cont">
+
                 <Filter setFilter={setFilter} sel={filter.sel} filter={filter.filter}/>
-                { !filter.sel ? <MainMenu /> : <FilteredMenu filter={filter} /> }
-                {/* <Router>
-
-                    <Filter />
-                    <div>
-                        <Switch>
-                            <Route path="/" exact Component={MainMenu}/>
-                            <Route path="/filter/:id" Component={FilteredMenu}/>
-                        </Switch>
-                    </div>
-
-                </Router> */}
+                { !filter.sel ? <MainMenu setFilter={setFilter} sel={filter.sel}/> : <FilteredMenu filter={filter} /> }
 
             </div>
         </div>
