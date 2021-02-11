@@ -4,12 +4,8 @@ import { useSelector,  useDispatch } from "react-redux";
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import payDone from "../Assets/img/payDone.svg";
 
 const useStyles = makeStyles({

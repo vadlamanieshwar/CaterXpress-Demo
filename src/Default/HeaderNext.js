@@ -1,32 +1,16 @@
-import React, {Component} from 'react';
-import { AppBar, IconButton } from '@material-ui/core';
+import React from 'react';
+import { IconButton, InputBase, Paper, Chip, List, ListItem, ListItemText, Drawer, Icon, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import Drawer from '@material-ui/core/Drawer';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-import { Icon, Button, Menu, MenuItem } from '@material-ui/core';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 import { getCart } from "../store/slices/cart";
-import { getItems } from "../store/slices/items";
 import logo from '../Assets/img/logo.svg';
 import home from '../Assets/img/home.png';
 import pickup from '../Assets/img/pickup.png';
@@ -43,14 +27,29 @@ const useStyles = makeStyles({
     },
     myorders:{
         color: "black",
-        textDecoration: "none"
+        textDecoration: "none",
+        display: "flex",
+        justifyContent: "space-evenly"
+    },
+    navItem:{
+        fontSize: "1.1rem",
+        fontWeight: "500",
+        padding: "0px 25px",
+        display: "flex",
+        justifyContent: "space-evenly",
+        color: "black",
+        textDecoration: "none",
+        
+    },
+    navText:{
+        width: "100%",
+        textAlign: "center"
     }
   });
 
 export default function HeaderNext() {
     const classes = useStyles();
     const no = useSelector(getCart) || 0;
-    const items = useSelector(getItems) || [];
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -76,7 +75,6 @@ export default function HeaderNext() {
            return <List>
                 {['Order', 'Starred', 'Rating', 'Sign out'].map((text, index) => (
                 <ListItem button key={text}>
-                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                     <ListItemText primary={text} />
                 </ListItem>
                 ))}
@@ -127,11 +125,11 @@ export default function HeaderNext() {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}><img src={home} alt="home"/>&nbsp;&nbsp;Home</MenuItem><hr/>
-                            <MenuItem onClick={handleClose}><img src={pickup} alt="pick up"/>&nbsp;&nbsp;Pick up</MenuItem><hr/>
-                            <MenuItem onClick={handleClose}><img src={offers} alt="offers"/>&nbsp;&nbsp;Offers</MenuItem><hr/>
-                            <Link to="/myorders"><MenuItem className={classes.myorders} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;My Orders</MenuItem></Link><hr/>
-                            <MenuItem onClick={handleClose}><img src={signout} alt="sign out"/>&nbsp;&nbsp;Sign out</MenuItem>
+                            <MenuItem className={classes.navItem} onClick={handleClose}><img src={home} alt="home"/>&nbsp;&nbsp;<div className={classes.navText}>Home</div></MenuItem><hr/>
+                            <MenuItem className={classes.navItem} onClick={handleClose}><img src={pickup} alt="pick up"/>&nbsp;&nbsp;<div className={classes.navText}>Pick up</div></MenuItem><hr/>
+                            <MenuItem className={classes.navItem} onClick={handleClose}><img src={offers} alt="offers"/>&nbsp;&nbsp;<div className={classes.navText}>Offers</div></MenuItem><hr/>
+                            <Link to="/myorders"><MenuItem className={classes.navItem} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;<div className={classes.navText}>My Orders</div></MenuItem></Link><hr/>
+                            <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<AmplifySignOut/></MenuItem>
                         </Menu>
                     </div>
                     <div style={{paddingBlockStart:"20px"}}>

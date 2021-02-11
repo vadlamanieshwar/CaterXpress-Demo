@@ -64,6 +64,20 @@
   display: flex;
   justify-content: flex-end;
 }
+.footer-logo{
+  width: 50px;
+    font-size: x-large;
+    background: white;
+    color: black;
+    border-radius: 50%;
+    height: 50px;
+    padding: 7px;
+}
+.footer-name{
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: larger;
+}
 .margin-right-footer{
   margin-right: 50px;
 }
@@ -311,4 +325,9 @@ opacity: 1;
   position: absolute;
   right: 10px;
   top: 5px;
+}
+
+amplify-sign-out{
+  --amplify-primary-color: white;
+  --amplify-primary-contrast: black;  
 }

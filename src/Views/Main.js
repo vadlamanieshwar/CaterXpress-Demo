@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { IconButton, Button } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropDownCircleSharpIcon from '@material-ui/icons/ArrowDropDownCircleSharp';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 // import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Card, CardContent, Typography, Button } from '@material-ui/core';
 
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
@@ -202,7 +199,7 @@ const Filter = (props) => {
 }
 
 const MainMenu = ( props ) => {
-    const [menu, setMenu] = useState(Menu.data);
+    const menu = Menu.data;
     const classes = useStyles();
 
     return(
@@ -285,7 +282,6 @@ const FilteredMenu = ( props ) => {
 }
 
 const Main = () => {
-    const classes = useStyles();
     const [filter,setFilter] = useState({
         filter:"",
         sel:false

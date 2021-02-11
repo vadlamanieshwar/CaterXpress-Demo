@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 
 import ItemModal from "./ItemModal";
 
 const RestaurantMenu = ({match}) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [open,setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true);

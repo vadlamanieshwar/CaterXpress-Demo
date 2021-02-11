@@ -1,4 +1,4 @@
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Container } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Provider } from "react-redux";
@@ -34,7 +34,6 @@ function App() {
 
         </Container>
       </Router>
-      <AmplifySignOut className="amplify-so" />
 
     </div>
     </Provider>
