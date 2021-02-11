@@ -223,3 +223,88 @@ opacity: 1;
   font-size: 30px;
   font-weight: 500;
 }
+
+.orders-title{
+  text-align: left;
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+.orders-subtitle{
+  text-align: left;
+  color: #8E8E8E;
+  padding-block-end: 10px;
+}
+
+.Order-sec{
+  padding: 10px;
+}
+
+.rest-name{
+  text-align: left;
+  font: normal normal normal 18px Roboto;
+  letter-spacing: 0px;
+  color: #E87803;
+}
+
+.delivery-det{
+  text-align: left;
+}
+
+.nxt-steps{
+  display: flex;
+  justify-content: space-around;
+}
+
+.rate-food{
+  background: #E8E8E8 0% 0% no-repeat padding-box;
+  border-radius: 40px;
+  padding: 10px;
+  color: black;
+}
+
+.reorder{
+  background: transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box;
+  border-radius: 40px;
+  padding: 10px;
+  color: #FFFFFF;
+}
+
+
+.rating-img{
+  opacity: 0.8;
+}
+
+.rest-rating-sec{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-inline-start: 10px;
+  text-align: left;
+}
+
+.rat-title-sec{
+  font: normal normal normal 17px/20px SF Pro;
+  letter-spacing: 0px;
+  color: #ACACAC;
+}
+
+.ret-rest-tit{
+  font: normal normal normal 32px Roboto;
+  letter-spacing: 0px;
+  color: #E87803;
+
+}
+
+
+.rating-box{
+  border-style: outset;
+    border-radius: 20px;
+    padding: 5px 15px 1px;
+}
+
+.remove-sec{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}

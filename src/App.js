@@ -9,7 +9,8 @@ import Main from './Views/Main';
 import RestaurantMenu from './Views/RestaurantMenu';
 import Payment from "./Views/Payment";
 import store from "./store";
-
+import MyOrders from './Views/MyOrders';
+import Ratings from './Views/Ratings';
 import './App.css';
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
             <Route path="/" exact render={props => <Main {...props}/>}  />
             <Route path="/restaurant" render={props => <RestaurantMenu {...props}/>} />
             <Route path="/payment" render={props => <Payment {...props}/>} />
+            <Route path="/myorders" render={props => <MyOrders {...props}/>} />
+            <Route path="/rating" render={props => <Ratings {...props}/>} />
           </Switch>
           <Footer />
 

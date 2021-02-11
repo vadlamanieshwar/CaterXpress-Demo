@@ -23,11 +23,16 @@ import Drawer from '@material-ui/core/Drawer';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-import Icon from '@material-ui/core/Icon';
+import { Icon, Button, Menu, MenuItem } from '@material-ui/core';
 
 import { getCart } from "../store/slices/cart";
 import { getItems } from "../store/slices/items";
 import logo from '../Assets/img/logo.svg';
+import home from '../Assets/img/home.png';
+import pickup from '../Assets/img/pickup.png';
+import offers from '../Assets/img/offers.png';
+import myorders from '../Assets/img/myorders.png';
+import signout from '../Assets/img/signout.png';
 
 const useStyles = makeStyles({
     list: {
@@ -36,13 +41,25 @@ const useStyles = makeStyles({
     fullList: {
       width: 'auto',
     },
+    myorders:{
+        color: "black",
+        textDecoration: "none"
+    }
   });
 
 export default function HeaderNext() {
     const classes = useStyles();
     const no = useSelector(getCart) || 0;
     const items = useSelector(getItems) || [];
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
     const [state, setState] = React.useState({
       left: false,
       right: false
@@ -102,7 +119,20 @@ export default function HeaderNext() {
 
                   <div className="nav-left">
                     <div style={{padding:"20px"}}>
-                        <MenuIcon fontSize="large" onClick={toggleDrawer("left", true)}/>
+                        <MenuIcon fontSize="large" onClick={handleClick}/>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}><img src={home} alt="home"/>&nbsp;&nbsp;Home</MenuItem><hr/>
+                            <MenuItem onClick={handleClose}><img src={pickup} alt="pick up"/>&nbsp;&nbsp;Pick up</MenuItem><hr/>
+                            <MenuItem onClick={handleClose}><img src={offers} alt="offers"/>&nbsp;&nbsp;Offers</MenuItem><hr/>
+                            <Link to="/myorders"><MenuItem className={classes.myorders} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;My Orders</MenuItem></Link><hr/>
+                            <MenuItem onClick={handleClose}><img src={signout} alt="sign out"/>&nbsp;&nbsp;Sign out</MenuItem>
+                        </Menu>
                     </div>
                     <div style={{paddingBlockStart:"20px"}}>
                         <Link to="/">
