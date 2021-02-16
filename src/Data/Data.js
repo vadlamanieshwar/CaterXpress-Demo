@@ -15,7 +15,8 @@ import exMex from '../Assets/img/exMex.png';
 import exCafe from '../Assets/img/exCafe.png';
 
 export const Menu =
-{ data: [
+{ 
+    data: [
     {
         category: "Near Me",
         options: [

@@ -1,42 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* Footer css */
 
 #footer{
   background-color: #1B2430;
@@ -89,6 +51,8 @@
   margin-right: 50px;
 }
 
+/* Header css */
+
 .header-menu-button{
   margin-left: 30px;
 }
@@ -103,6 +67,9 @@
 .nav-right{
   display: flex;
 }
+
+/* AD css */
+
 .ad-sec-cont{
   background: transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -116,6 +83,7 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .opt-nxt{
   background: #FFFFFF 0% 0% no-repeat padding-box;
 box-shadow: 0px 0px 15px #00000014;
@@ -144,11 +112,15 @@ opacity: 1;
   font-weight: 500;
 }
 
+/* Filter css */
+
 .food-filter{
   display: flex;
   justify-content: space-evenly;
   padding: 20px;
 }
+
+/* Category section css */
 
 .cat-title-cont{
   display: flex;
@@ -183,6 +155,8 @@ opacity: 1;
   height: 198px;
 }
 
+/* Right drawer css */
+
 .right-drawer{
   width: 400px;
 }
@@ -214,6 +188,9 @@ opacity: 1;
   justify-content: space-between;
   width: 100px;
 }
+
+/* PAyment page css */
+
 .payment{
   display:flex;
   justify-content: center;
@@ -242,6 +219,8 @@ opacity: 1;
   text-align: center;
 }
 
+/* MyOrders css */
+
 .orders-title{
   text-align: left;
   font-size: xx-large;
@@ -257,6 +236,8 @@ opacity: 1;
 .Order-sec{
   padding: 10px;
 }
+
+/* Rating page css */
 
 .rest-name{
   text-align: left;
@@ -313,8 +294,6 @@ opacity: 1;
   color: #E87803;
 
 }
-
-
 .rating-box{
   border-style: outset;
     border-radius: 20px;
@@ -326,6 +305,8 @@ opacity: 1;
   right: 10px;
   top: 5px;
 }
+
+/* amplify sign out css */
 
 amplify-sign-out{
   --amplify-primary-color: white;

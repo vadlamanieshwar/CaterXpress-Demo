@@ -37,7 +37,6 @@ const ItemModal = () => {
     const dispatch = useDispatch();
     const items = useSelector(getItems) || [];
     const classes = useStyles();
-    // getModalStyle is not a pure function, we roll the style only on the first render
 
     return(
 

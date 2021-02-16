@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropDownCircleSharpIcon from '@material-ui/icons/ArrowDropDownCircleSharp';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 // import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button } from '@material-ui/core';
+import axios from 'axios';
+import { API, graphqlOperation } from 'aws-amplify';
 
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
@@ -286,6 +288,19 @@ const Main = () => {
         filter:"",
         sel:false
     });
+
+    useEffect(() => {
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/product")
+        .then(res => {
+          console.log(res,"get")
+        })
+    }, [])
+
+    // async function fetchTodos() {
+    //     try {
+    //       const todoData = await API.graphql(graphqlOperation(listTodos))
+    //      } catch (err) { console.log('error fetching todos') }
+    //   }
 
     return (
         <div className="Main-cont">
