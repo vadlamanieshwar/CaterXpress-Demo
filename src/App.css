@@ -312,3 +312,13 @@ amplify-sign-out{
   --amplify-primary-color: white;
   --amplify-primary-contrast: black;  
 }
+
+/* Menu seperate page css */
+
+.menu-name-sec{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

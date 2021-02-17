@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button } from '@material-ui/core';
 import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
+import { useSelector, useDispatch } from "react-redux";
 
+import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
 import option1 from '../Assets/img/option1.svg';
@@ -240,7 +242,7 @@ const MainMenu = ( props ) => {
 }
 
 const FilteredMenu = ( props ) => {
-
+    const dispatch = useDispatch();
     const filMenu = FilterMenu.data
     const classes = useStyles();
 
@@ -256,6 +258,13 @@ const FilteredMenu = ( props ) => {
                                         className={classes.media}
                                         src={im}
                                         alt={fil.category}
+                                        onClick={
+                                            ()=>{
+                                                fetchMenu().then(res => {
+                                                    dispatch(restMenuSlice.actions.addMenu(res));
+                                                })                                       
+                                            }
+                                        }
                                     />
                                 </Link>
                             ))}
@@ -283,17 +292,27 @@ const FilteredMenu = ( props ) => {
     );
 }
 
+async function fetchMenu(){
+    return new Promise((resolve, reject) => {
+
+     axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=Example%20Burgers")
+    .then(res => resolve(res.data))
+    })
+
+}
+
 const Main = () => {
     const [filter,setFilter] = useState({
         filter:"",
         sel:false
     });
+    const menu = useSelector(getRestMenu) || [];
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/product")
-        .then(res => {
-          console.log(res,"get")
-        })
+        // fetchMenu().then(res => {
+        //     dispatch(restMenuSlice.actions.addMenu(res));
+        // })
     }, [])
 
     // async function fetchTodos() {
