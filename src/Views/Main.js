@@ -56,10 +56,10 @@ const useStyles = makeStyles((theme) => ({
         border: "1px solid #707070",
         borderRadius: "36px",
         opacity: 1,
-        font: "normal normal normal 26px/31px SF Pro",
+        font: "normal normal normal 14px SF Pro",
         letterSpacing: "0px",
         color: "#19222A",
-        padding: "10px 20px",
+        padding: "5px 20px",
         "& :focus":{
             outline: "none"
         }
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
       viweAllChip:{
         background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box",
         borderRadius: 36,
-        padding: "10px 20px",
+        padding: "5px 20px",
         color: "white"
       },
       starColor: {
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
       optChange: {
           background: "#DBDBDB",
           borderRadius: "50%",
-          fontSize: "xxx-large",
+          fontSize: "xx-large",
           color: "#6C6C6C",
           padding: "5px",
           marginLeft: "10px"
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
       media:{
           width: 400,
           height: 270,
-          padding: 20
+          padding: "20px 20px 0 20px"
       },
       flex:{
           display: "flex"
@@ -93,8 +93,8 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-between",
         color: "#898989",
-        font: "normal normal normal 25px/30px Roboto",
-        padding: 10
+        font: "normal normal normal 14px Roboto",
+        paddingBottom: 10
       },
       filteredMenuCont:{
           paddingBlockStart: 10,
@@ -124,32 +124,32 @@ const FoodOptions = () => {
                     <span className="opt-food-span">Burgers</span>
                 </div>
                 <div className="opt-food">
-                    <img src={option2} alt="Sea food"></img>
-                    <span className="opt-food-span">Sea food</span>
-                </div>
-                <div className="opt-food">
-                    <img src={option3} alt="Thai"></img>
-                    <span className="opt-food-span">Thai</span>
-                </div>
-                <div className="opt-food">
-                    <img src={option4} alt="Chinese"></img>
-                    <span className="opt-food-span">Chinese</span>
-                </div>
-                <div className="opt-food">
-                    <img src={option5} alt="Cafe"></img>
-                    <span className="opt-food-span">Cafe</span>
+                    <img src={option7} alt="Latin America"></img>
+                    <span className="opt-food-span">Latin America</span>
                 </div>
                 <div className="opt-food">
                     <img src={option6} alt="Spanish"></img>
                     <span className="opt-food-span">Spanish</span>
                 </div>
                 <div className="opt-food">
-                    <img src={option7} alt="Latin America"></img>
-                    <span className="opt-food-span">Latin America</span>
+                    <img src={option3} alt="Thai"></img>
+                    <span className="opt-food-span">Thai</span>
+                </div>
+                <div className="opt-food">
+                    <img src={option5} alt="Cafe"></img>
+                    <span className="opt-food-span">Cafe</span>
+                </div>
+                <div className="opt-food">
+                    <img src={option4} alt="Chinese"></img>
+                    <span className="opt-food-span">Chinese</span>
                 </div>
                 <div className="opt-food">
                     <img src={option8} alt="Fast Food"></img>
                     <span className="opt-food-span">Fast Food</span>
+                </div>
+                <div className="opt-food">
+                    <img src={option2} alt="Sea food"></img>
+                    <span className="opt-food-span">Sea food</span>
                 </div>
                 <Button
                     variant="contained"
@@ -263,7 +263,7 @@ const FilteredMenu = ( props ) => {
     const classes = useStyles();
 
     return(
-        <div>
+        <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
             {filMenu.map((fil,i) => (
                 <div className={classes.filteredMenuCont}>
                     <Card>
@@ -295,7 +295,7 @@ const FilteredMenu = ( props ) => {
                             })}
                         </div>
                     <CardContent>
-                        <Typography style={{textAlign:"initial"}} gutterBottom variant="h5" component="h2">
+                        <Typography style={{textAlign:"initial", paddingBottom:"0"}} gutterBottom variant="h5" component="h2">
                             {fil.category}
                         </Typography>
                         <div className={classes.filterContent}>
@@ -304,7 +304,7 @@ const FilteredMenu = ( props ) => {
                         </div>
                         <div className={classes.filterContent}>
                             <div className={classes.flex}>
-                                <div style={{marginRight: "20px"}}>{fil.ratings}<StarOutlineIcon /></div>
+                                <div style={{marginRight: "20px"}}>{fil.ratings}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
                                 <div>{fil.reviews}+ Reviews</div>
                             </div>
                             <div>${fil.delivery} Delivery</div>

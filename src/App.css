@@ -125,11 +125,13 @@ opacity: 1;
 
 .cat-title-cont{
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .cat-title{
-  font: normal normal bold 60px/79px Roboto;
+  font: normal normal bold 34px Roboto;
 }
 
 .cat-options{
@@ -139,7 +141,8 @@ opacity: 1;
 .opt-card{
   padding: 10px;
   text-align: initial;
-  width: 410px;
+  width: 33.33%;
+  overflow: hidden;
 }
 
 .opt-restaurant{
@@ -332,4 +335,8 @@ amplify-sign-out{
 
 a:hover{
   text-decoration: none;
+}
+
+.App{
+  padding: 0px 5% 0px 5%;
 }

@@ -23,7 +23,7 @@ export default function Footer() {
                 </div>
                 <div className="col-sm-3">
                     <ul className="footer-ul">
-                        <li>View all reataurants</li>
+                        <li>View all restaurants</li>
                         <li>View all cities</li>
                         <li>Near by restaurant</li>
                         <li>FAQ</li>
