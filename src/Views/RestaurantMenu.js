@@ -147,7 +147,7 @@ const RestaurantMenu = ({match}) => {
                             <CardMedia
                                 className={classes.cover}
                                 image={cm.url}
-                                title="Live from space album cover"
+                                title="media"
                             />
                         </Card>
                      ) )}
