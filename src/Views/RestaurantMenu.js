@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
       },
       cover: {
         width: 230,
-        borderRadius: "40px 0px 0px 40px"
       },
       mostPopular: {
         margin: "0 -5px",
@@ -130,7 +129,7 @@ const RestaurantMenu = ({match}) => {
                     <div className={classes.det}>$ . American . Fast Food . Burger</div>
                     <div className={classes.address}>{menu.restMenu["Example Burgers"][0].address}</div>
                     <div className={classes.dd}>
-                        <div>Break Fast&nbsp;<ExpandMoreIcon color="black"/></div>
+                        <div>Break Fast&nbsp;<ExpandMoreIcon color="primary"/></div>
                         <div>6:00 am - 11 am</div>
                     </div>
                 </div>

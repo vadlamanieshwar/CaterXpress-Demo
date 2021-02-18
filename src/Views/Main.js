@@ -25,6 +25,7 @@ import { ReactComponent as Icon } from '../Assets/img/options.svg';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Menu, FilterMenu } from '../Data/Data';
+import reviewsSlice from "../store/slices/reviews";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -327,14 +328,17 @@ const Main = () => {
     });
     const menu = useSelector(getRestMenu) || [];
     const dispatch = useDispatch();
-
     useEffect(() => {
 
         axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burgers")
-    .then(res => (console.log(res.data)))
+    .then(res => {
+        dispatch(reviewsSlice.actions.addReviews(res.data));
+    })
+    
 
     }, [])
 
+    
     // async function fetchTodos() {
     //     try {
     //       const todoData = await API.graphql(graphqlOperation(listTodos))

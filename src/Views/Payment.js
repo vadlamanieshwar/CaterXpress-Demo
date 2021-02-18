@@ -51,7 +51,7 @@ const Payment = () => {
                                 Your Payment was Successful.<br/><br/><br/>Enjoy Your Food!
                             </div>
                             <Link to="/">
-                                <div className="pay-button" onclick={()=>setPay(false)}>Back to Menu</div>
+                                <div className="pay-button" onClick={()=>setPay(false)}>Back to Menu</div>
                             </Link>
                         </div>
                     :

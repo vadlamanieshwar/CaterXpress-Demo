@@ -57,7 +57,6 @@ export default function HeaderNext() {
     items.map((it,i)=>{
         total= total+(it.cost)
     })
-    console.log(total)
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
