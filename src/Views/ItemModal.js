@@ -1,7 +1,9 @@
+// local imports 
 import itemSlice, { getItems } from "../store/slices/items";
 import cartSlice from "../store/slices/cart";
 import exBur from '../Assets/img/exBur.png';
 
+// imports from downloads
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';

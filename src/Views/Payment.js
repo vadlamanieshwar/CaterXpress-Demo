@@ -1,12 +1,16 @@
+// local imports
 import itemSlice, { getItems } from "../store/slices/items";
 import cartSlice from "../store/slices/cart";
+import payDone from "../Assets/img/payDone.svg";
+
+// imports from downloads
 import { useSelector,  useDispatch } from "react-redux";
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
-import payDone from "../Assets/img/payDone.svg";
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles({
     root: {
@@ -68,7 +72,11 @@ const Payment = () => {
                                 <input className="payment-input" placeholder="CVV"/>
                             </div>
                             <div>
-                                <input className="payment-input" type="radio" id="credit" name="credit" value="Save credit card information"/>
+                                <Checkbox
+                                    defaultChecked
+                                    color="primary"
+                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                />                                
                                 <label for="credit">Save credit card information</label><br/>
                             </div>
                             <div className="pay-button" onClick={()=>{

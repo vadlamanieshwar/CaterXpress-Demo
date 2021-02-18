@@ -1,3 +1,4 @@
+// local imports
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropDownCircleSharpIcon from '@material-ui/icons/ArrowDropDownCircleSharp';
@@ -8,7 +9,11 @@ import { Card, CardContent, Typography, Button } from '@material-ui/core';
 import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
 import { useSelector, useDispatch } from "react-redux";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
+// imports from downloads
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
@@ -20,10 +25,7 @@ import option5 from '../Assets/img/option5.svg';
 import option6 from '../Assets/img/option6.svg';
 import option7 from '../Assets/img/option7.png';
 import option8 from '../Assets/img/option8.png';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { ReactComponent as Icon } from '../Assets/img/options.svg';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Menu, FilterMenu } from '../Data/Data';
 import reviewsSlice from "../store/slices/reviews";
 
@@ -58,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
         letterSpacing: "0px",
         color: "#19222A",
         padding: "10px 20px",
+        "& :focus":{
+            outline: "none"
+        }
       },
       viweAllChip:{
         background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box",

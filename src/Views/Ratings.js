@@ -1,3 +1,4 @@
+// imports from downloads
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -8,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useSelector,  useDispatch } from "react-redux";
 
+// local imports
 import exBur from '../Assets/img/exBur.png';
 import { ReactComponent as RemoveIcon } from '../Assets/img/remove-button.svg';
 import reviewsSlice, { getReviews } from "../store/slices/reviews";

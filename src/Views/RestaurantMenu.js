@@ -1,3 +1,4 @@
+// imports from downloads
 import { useSelector } from "react-redux";
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
@@ -10,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
+// local imports
 import ItemModal from "./ItemModal";
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import restBack from '../Assets/img/restBack.png';

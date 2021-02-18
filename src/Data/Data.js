@@ -13,6 +13,9 @@ import he3 from '../Assets/img/he3.png';
 import exBur from '../Assets/img/exBur.png';
 import exMex from '../Assets/img/exMex.png';
 import exCafe from '../Assets/img/exCafe.png';
+import bur1 from '../Assets/img/bur1.png';
+import exMex2 from '../Assets/img/exMex2.png';
+import exCafe2 from '../Assets/img/exCafe2.png';
 
 export const Menu =
 { 
@@ -121,7 +124,7 @@ export const FilterMenu = {
             ratings: 4.5,
             reviews: 4572,
             delivery: 1.99,
-            img: [nf1, exBur]
+            img: [exBur, bur1]
         },
         {
             category: "Example Mexican",
@@ -130,7 +133,7 @@ export const FilterMenu = {
             ratings: 4.8,
             reviews: 9772,
             delivery: 2.50,
-            img: [nf2, exMex]
+            img: [exMex2, exMex]
         },
         {
             category: "Example Cafe",
@@ -139,7 +142,7 @@ export const FilterMenu = {
             ratings: 4.6,
             reviews: 1256,
             delivery: 3.99,
-            img: [nm2, exCafe]
+            img: [exCafe2, exCafe]
         }
     ]
 }
