@@ -99,12 +99,22 @@ const useStyles = makeStyles((theme) => ({
 const FoodOptions = () => {
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     return(
         <div className="option-sec-cont">
                 {/* can map all these by storing in state or getting from api */}
                 <div className="opt-food">
-                    <img src={option1} alt="Burgers"></img>
+                    <Link to="/restaurant">
+                    <img src={option1} alt="Burgers"
+                    onClick={
+                        ()=>{
+                            fetchMenu().then(res => {
+                                dispatch(restMenuSlice.actions.addMenu(res));
+                            })                                       
+                        }
+                    }></img>
+                    </Link>
                     <span className="opt-food-span">Burgers</span>
                 </div>
                 <div className="opt-food">
@@ -252,8 +262,9 @@ const FilteredMenu = ( props ) => {
                 <div className={classes.filteredMenuCont}>
                     <Card>
                         <div className={classes.flex}>
-                            {fil.img.map((im,idx) => (
-                                <Link to='/restaurant'>
+                            {fil.img.map((im,idx) => {
+                                if(fil.category === "Example Burger"){
+                                    return <Link to='/restaurant'>
                                     <img
                                         className={classes.media}
                                         src={im}
@@ -267,7 +278,15 @@ const FilteredMenu = ( props ) => {
                                         }
                                     />
                                 </Link>
-                            ))}
+                                }else{
+                                    return <img
+                                    className={classes.media}
+                                    src={im}
+                                    alt={fil.category}
+                                />
+                                }
+                                
+                            })}
                         </div>
                     <CardContent>
                         <Typography style={{textAlign:"initial"}} gutterBottom variant="h5" component="h2">
@@ -310,9 +329,10 @@ const Main = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // fetchMenu().then(res => {
-        //     dispatch(restMenuSlice.actions.addMenu(res));
-        // })
+
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burgers")
+    .then(res => (console.log(res.data)))
+
     }, [])
 
     // async function fetchTodos() {

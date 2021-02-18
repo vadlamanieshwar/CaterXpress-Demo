@@ -12,7 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 import ItemModal from "./ItemModal";
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
-import exBur from '../Assets/img/exBur.png';
+import restBack from '../Assets/img/restBack.png';
+import mcrib from '../Assets/img/mcrib.png';
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        backgroundImage: `url(${exBur})`,
+        backgroundImage: `url(${restBack})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 300px",
         color: "white",
@@ -46,28 +47,41 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     root: {
-        display: 'flex',
-        margin: 20,
-        justifyContent: "space-between",
-        width: 350
+        float: "left",
+        width: "45%",
+        margin: 10,
+        display: "flex",
+        justifyContent: "space-between"
       },
       details: {
         display: 'flex',
         flexDirection: 'column',
       },
       content: {
-        flex: '1 0 auto',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "200px"
       },
       cover: {
-        width: 120,
+        width: 230,
         borderRadius: "40px 0px 0px 40px"
       },
       mostPopular: {
-          display: "flex",
+        margin: "0 -5px",
+        "& :after": {
+            content: "",
+            display: "table",
+            clear: "both"
+          }
       },
       comboMeals: {
-          display: "flex"
-      },
+        margin: "0 -5px",
+        "& :after": {
+            content: "",
+            display: "table",
+            clear: "both"
+          }      },
       det:{
         color: "#191919",
         fontWeight: 500
@@ -103,7 +117,6 @@ const RestaurantMenu = ({match}) => {
         <div>{Object.keys(menu).length > 0?
         
             <div className="menu-page-cont">
-                {console.log(menu.restMenu["Example Burgers"][0].name)}
                 <div className={classes.menuBack}>
                     <div className={classes.title}>{menu.restMenu["Example Burgers"][0].name}</div>
                     <div className={classes.deliverinfo}>
@@ -133,20 +146,28 @@ const RestaurantMenu = ({match}) => {
                     <h3>Most Popular</h3>
                     <div className={classes.mostPopular}>
                     {menu.restMenu["Example Burgers"][0]["Most Popular"].map( (cm,idx) => (
-                        <Card className={classes.root}  onClick={handleOpen}>
-                            <div className={classes.details}>
-                                <CardContent className={classes.content}>
-                                <Typography component="h5" variant="h5">
-                                    {cm.pname}
-                                </Typography>
-                                <Typography variant="subtitle1" color="textSecondary">
-                                    {cm.cal}<br/>${cm.price}
-                                </Typography>
+                        <Card className={classes.root}  onClick={()=>{
+                            if(cm.pname === "McRib Meal"){
+                                handleOpen();
+                            }
+                        }}>
+                            <div
+                             className={classes.details}
+                            >
+                                <CardContent 
+                                className={classes.content}
+                                >
+                                    <Typography component="h5" variant="h5">
+                                        {cm.pname}
+                                    </Typography>
+                                    <Typography variant="subtitle1" color="textSecondary">
+                                        {cm.cal}<br/>${cm.price}
+                                    </Typography>
                                 </CardContent>
                             </div>
                             <CardMedia
                                 className={classes.cover}
-                                image={cm.url}
+                                image={mcrib}
                                 title="media"
                             />
                         </Card>
@@ -189,7 +210,7 @@ const RestaurantMenu = ({match}) => {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
         >
-            <ItemModal />
+            <ItemModal handleClose={handleClose}/>
         </Modal>
     </div>
     )

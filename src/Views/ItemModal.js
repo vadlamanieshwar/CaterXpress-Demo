@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ItemModal = () => {
+const ItemModal = ( props ) => {
     const dispatch = useDispatch();
     const items = useSelector(getItems) || [];
     const classes = useStyles();
@@ -51,7 +51,7 @@ const ItemModal = () => {
                     <h6>Required</h6>
                 </div>
                 <div style={{padding: "5px"}}>
-                    <input type="radio" id="McRib Meal" name="food" value="McRib Meal"/>
+                    <input type="radio" id="McRib Meal" name="food" value="McRib Meal" checked/>
                     <label for="McRib Meal">McRib Meal</label><br/>
                     <input type="radio" id="McRib Meal Large" name="food" value="McRib Meal Large"/>
                     <label for="McRib Meal Large">McRib Meal Large&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+$4.20</label><br></br>
@@ -67,13 +67,28 @@ const ItemModal = () => {
                     <button
                         className={classes.button}
                         onClick={()=>{
-                            console.log(items)
-                            dispatch(cartSlice.actions.added());
-                            dispatch(itemSlice.actions.addItems({
-                                itemName:"McRib Meal",
-                                itemNo: 1,
-                                cost: 9.75
-                            }))
+                            if(document.getElementById("McRib Meal").checked){
+                                dispatch(cartSlice.actions.added());
+                                dispatch(itemSlice.actions.addItems({
+                                    itemName:"McRib Meal",
+                                    itemNo: 1,
+                                    cost: 9.75,
+                                    rest: "Example Burger",
+                                    time: new Date().toString()
+                                }))
+                                props.handleClose();
+                            }else{
+                                dispatch(cartSlice.actions.added());
+                                dispatch(itemSlice.actions.addItems({
+                                    itemName:"McRib Meal Large",
+                                    itemNo: 1,
+                                    cost: 13.95,
+                                    rest: "Example Burger",
+                                    time: new Date().toString()
+                                }))
+                                props.handleClose();
+                            }
+                            
                         }}
                     
                         >Add 1 to order &nbsp;&nbsp; $9.75 </button>

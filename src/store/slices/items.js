@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const addItems = ( state, action) => {
-    console.log(action.payload);
+    // console.log(action.payload);
     state.push(action.payload);
 }
 

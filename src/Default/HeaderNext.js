@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 
+import itemSlice, { getItems } from "../store/slices/items";
 import { getCart } from "../store/slices/cart";
 import logo from '../Assets/img/logo.svg';
 import home from '../Assets/img/home.png';
@@ -48,10 +49,15 @@ const useStyles = makeStyles({
   });
 
 export default function HeaderNext() {
+    const items = useSelector(getItems) || [];
     const classes = useStyles();
     const no = useSelector(getCart) || 0;
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    let total = 0;
+    items.map((it,i)=>{
+        total= total+(it.cost)
+    })
+    console.log(total)
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -83,30 +89,49 @@ export default function HeaderNext() {
         else{
             return (
                 <div className="right-drawer">
-                    <div className="right-drawer-title">
+                    {items.length>0?
                         <div>
-                            <h2>Your Order</h2>
-                            <p>From <u>Example Burger</u></p>
+                            <div className="right-drawer-title">
+                                <div>
+                                    <h2>Your Order</h2>
+                                    <p>From <u>Example Burger</u></p>
+                                </div>
+                                <CancelRoundedIcon onClick={toggleDrawer("right", false)}/>
+                            </div>
+                            <Link to="/payment" onClick={toggleDrawer("right", false)}>
+                                <div className="checkout">
+                                    <div>Checkout</div>
+                                    <div>${total}</div>
+                                </div>
+                            </Link>
+                            {items.map((item,i)=>(
+                                <div>
+                                    <div className="drawer-item">
+                                        <div>
+                                            <div>{item.itemNo} X {item.itemName}</div>
+                                            <div><u>Remove</u></div>
+                                        </div>
+                                        <div className="change">
+                                            <Icon>remove_circle</Icon>
+                                            <div>1</div>
+                                            <Icon>add_circle</Icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                                
                         </div>
-                        <CancelRoundedIcon onClick={toggleDrawer("right", false)}/>
-                    </div>
-                    <Link to="/payment" onClick={toggleDrawer("right", false)}>
-                        <div className="checkout">
-                            <div>Checkout</div>
-                            <div>$9.75</div>
-                        </div>
-                    </Link>
-                    <div className="drawer-item">
+                    :
                         <div>
-                            <div>1 X McRib Meal</div>
-                            <div><u>Remove</u></div>
+                            <div className="right-drawer-title">
+                                <div>
+                                    <h2>Your Order</h2>
+                                </div>
+                                <CancelRoundedIcon onClick={toggleDrawer("right", false)}/>
+                            </div>
                         </div>
-                        <div className="change">
-                            <Icon>remove_circle</Icon>
-                            <div>1</div>
-                            <Icon>add_circle</Icon>
-                        </div>
-                    </div>
+                    }
+                    
                 </div>
             );
         }

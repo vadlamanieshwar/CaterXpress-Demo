@@ -315,6 +315,9 @@ amplify-sign-out{
 
 /* Menu seperate page css */
 
+.menu-page-cont{
+  height: 1200px
+}
 .menu-name-sec{
   width: 100%;
   height: 300px;
