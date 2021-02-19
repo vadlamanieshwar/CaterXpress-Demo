@@ -278,7 +278,7 @@ const FilteredMenu = ( props ) => {
                             {fil.img.map((im,idx) => {
                                 if(fil.category === "Example Burger"){
                                     // remove "s" once the data changed by ashley ------------------------
-                                    return <Link to={"/restaurant/"+fil.category+"s"}>
+                                    return <Link to={"/restaurant/"+fil.category}>
                                     <img
                                         className={classes.media}
                                         src={im}
@@ -328,7 +328,7 @@ const FilteredMenu = ( props ) => {
 async function fetchMenu(rest){
     let q="";
     if(rest === "Example Burger"){
-        q= "Example%20Burgers";
+        q= "Example%20Burger";
     }
     // else if( q === "" ){
     // 

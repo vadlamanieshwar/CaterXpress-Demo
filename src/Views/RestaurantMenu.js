@@ -154,22 +154,12 @@ const RestaurantMenu = ({match}) => {
                     <div className={classes.mostPopular}>
                     {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
 
-                        let  url="";
-                        if(cm.pname === "McRib Meal"){
-                            url = mcrib;
-                        }else if(cm.pname === "Medium French Fries"){
-                            url = fries;
-                        }else if(cm.pname === "Cake"){
-                            url = cake;
-                        }else if(cm.pname === "40 McNuggets"){
-                            url = nug;
-                        }
                         return <Card className={classes.root}  onClick={()=>{
-                            // if(cm.pname === "McRib Meal"){
+                            if(cm.pname === "McRib Meal"){
                                 handleOpen();
                                 console.log({...cm,restaurant:menu.restMenu[res][0]["name"]})
                                 setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
-                            // }
+                            }
                         }}>
                             <div
                              className={classes.details}
@@ -187,7 +177,7 @@ const RestaurantMenu = ({match}) => {
                             </div>
                             <CardMedia
                                 className={classes.cover}
-                                image={url}
+                                image={cm.url}
                                 title="media"
                             />
                         </Card>
