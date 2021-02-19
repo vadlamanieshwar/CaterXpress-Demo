@@ -115,7 +115,7 @@ const FoodOptions = () => {
                     <img src={option1} alt="Burgers"
                     onClick={
                         ()=>{
-                            fetchMenu().then(res => {
+                            fetchMenu("Example Burger").then(res => {
                                 dispatch(restMenuSlice.actions.addMenu(res));
                             })                                       
                         }
@@ -188,6 +188,8 @@ const Filter = (props) => {
                         className={classes.chip} 
                         variant="outlined"
                         onClick={()=>{
+                            // need to call fetchFilter() to display from DB over 4.5 ratings
+                            // dispatch to filtered menu slice which need to be created
                             if(props.sel && props.filter !== "rate"){
                                 props.setFilter({filter:"rate",sel:props.sel});
                             }
@@ -259,10 +261,12 @@ const MainMenu = ( props ) => {
 
 const FilteredMenu = ( props ) => {
     const dispatch = useDispatch();
+    // get filtered menu from store
     const filMenu = FilterMenu.data
     const classes = useStyles();
 
     return(
+        // add loading till you get filMenu from store
         <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
             {filMenu.map((fil,i) => (
                 <div className={classes.filteredMenuCont}>
@@ -277,7 +281,7 @@ const FilteredMenu = ( props ) => {
                                         alt={fil.category}
                                         onClick={
                                             ()=>{
-                                                fetchMenu().then(res => {
+                                                fetchMenu(fil.category).then(res => {
                                                     dispatch(restMenuSlice.actions.addMenu(res));
                                                 })                                       
                                             }
@@ -317,11 +321,34 @@ const FilteredMenu = ( props ) => {
     );
 }
 
-async function fetchMenu(){
+async function fetchMenu(rest){
+    let q="";
+    if(rest === "Example Burger"){
+        q= "Example%20Burgers";
+    }
+    // else if( q === "" ){
+// 
+    // }
     return new Promise((resolve, reject) => {
 
-     axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=Example%20Burgers")
+     axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=" + q)
     .then(res => resolve(res.data))
+    })
+
+}
+//need to be changed accordingly once API is ready
+async function fetchFilter(filter){
+    let q="";
+    if(filter === "rating"){
+        q= "raring 4.5";
+    }
+    // else if( q === "" ){
+// 
+    // }
+    return new Promise((resolve, reject) => {
+
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/"+ q)
+        .then(res => resolve(res.data))
     })
 
 }
@@ -358,6 +385,7 @@ const Main = () => {
             <Ad />
             
             <div className="food-sec-cont">
+                {/* use router once the API done */}
 
                 <Filter setFilter={setFilter} sel={filter.sel} filter={filter.filter}/>
                 { !filter.sel ? <MainMenu setFilter={setFilter} sel={filter.sel}/> : <FilteredMenu filter={filter} /> }
