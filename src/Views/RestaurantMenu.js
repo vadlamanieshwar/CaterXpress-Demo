@@ -107,9 +107,12 @@ const useStyles = makeStyles((theme) => ({
 
 const RestaurantMenu = ({match}) => {
     // const dispatch = useDispatch();
+    const res = match.params.id;
+    console.log(res);
     const classes = useStyles();
     const menu = useSelector(getRestMenu) || {};
     const [open,setOpen] = useState(false);
+    const [clicked,setClicked] = useState({})
     const handleOpen = () => {
         setOpen(true);
       };
@@ -122,17 +125,17 @@ const RestaurantMenu = ({match}) => {
         
             <div className="menu-page-cont">
                 <div className={classes.menuBack}>
-                    <div className={classes.title}>{menu.restMenu["Example Burgers"][0].name}</div>
+                    <div className={classes.title}>{menu.restMenu[res][0].name}</div>
                     <div className={classes.deliverinfo}>
-                        $ {menu.restMenu["Example Burgers"][0].deliverinfo[0].deliverinfo} Delivery fee.  
-                        Delivered in {menu.restMenu["Example Burgers"][0].deliverinfo[0].delivertime} mins . 
-                        &nbsp;{menu.restMenu["Example Burgers"][0].deliverinfo[0].rating} . 
-                        ({menu.restMenu["Example Burgers"][0].deliverinfo[0].reviewno}+ ratings)
+                        $ {menu.restMenu[res][0].deliverinfo[0].deliverinfo} Delivery fee.  
+                        Delivered in {menu.restMenu[res][0].deliverinfo[0].delivertime} mins . 
+                        &nbsp;{menu.restMenu[res][0].deliverinfo[0].rating} . 
+                        ({menu.restMenu[res][0].deliverinfo[0].reviewno}+ ratings)
                     </div>
                 </div>
                 <div>
                     <div className={classes.det}>$ . American . Fast Food . Burger</div>
-                    <div className={classes.address}>{menu.restMenu["Example Burgers"][0].address}</div>
+                    <div className={classes.address}>{menu.restMenu[res][0].address}</div>
                     <div className={classes.dd}>
                         <div>Break Fast&nbsp;<ExpandMoreIcon color="primary"/></div>
                         <div>6:00 am - 11 am</div>
@@ -149,8 +152,8 @@ const RestaurantMenu = ({match}) => {
                 <div>
                     <h3>Signature Dish</h3>
                     <div className={classes.mostPopular}>
-                    {menu.restMenu["Example Burgers"][0]["Signature Dish"].map( (cm,idx) => {
-                        
+                    {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
+
                         let  url="";
                         if(cm.pname === "McRib Meal"){
                             url = mcrib;
@@ -162,9 +165,11 @@ const RestaurantMenu = ({match}) => {
                             url = nug;
                         }
                         return <Card className={classes.root}  onClick={()=>{
-                            if(cm.pname === "McRib Meal"){
+                            // if(cm.pname === "McRib Meal"){
                                 handleOpen();
-                            }
+                                console.log({...cm,restaurant:menu.restMenu[res][0]["name"]})
+                                setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
+                            // }
                         }}>
                             <div
                              className={classes.details}
@@ -194,7 +199,7 @@ const RestaurantMenu = ({match}) => {
                     <h3>Combo Meals</h3>
                     <div className={classes.comboMeals}>
 
-                        {menu.restMenu["Example Burgers"][0]["Combo Meals"].map( (cm,idx) => (
+                        {menu.restMenu[res][0]["Combo Meals"].map( (cm,idx) => (
                             <Card className={classes.root}>
                                 <div className={classes.details}>
                                     <CardContent className={classes.content}>
@@ -225,7 +230,7 @@ const RestaurantMenu = ({match}) => {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
         >
-            <ItemModal handleClose={handleClose}/>
+            <ItemModal handleClose={handleClose} clicked={clicked}/>
         </Modal>
     </div>
     )

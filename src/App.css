@@ -340,3 +340,7 @@ a:hover{
 .App{
   padding: 0px 5% 0px 5%;
 }
+
+button:focus {
+  outline: none;
+}

@@ -190,6 +190,9 @@ const Filter = (props) => {
                         onClick={()=>{
                             // need to call fetchFilter() to display from DB over 4.5 ratings
                             // dispatch to filtered menu slice which need to be created
+                            // fetchMenu("rating").then(res => {
+                                // dispatch(filterSlice.actions.addFilter(res));
+                            // })
                             if(props.sel && props.filter !== "rate"){
                                 props.setFilter({filter:"rate",sel:props.sel});
                             }
@@ -274,7 +277,8 @@ const FilteredMenu = ( props ) => {
                         <div className={classes.flex}>
                             {fil.img.map((im,idx) => {
                                 if(fil.category === "Example Burger"){
-                                    return <Link to='/restaurant'>
+                                    // remove "s" once the data changed by ashley ------------------------
+                                    return <Link to={"/restaurant/"+fil.category+"s"}>
                                     <img
                                         className={classes.media}
                                         src={im}
@@ -327,7 +331,7 @@ async function fetchMenu(rest){
         q= "Example%20Burgers";
     }
     // else if( q === "" ){
-// 
+    // 
     // }
     return new Promise((resolve, reject) => {
 
@@ -336,14 +340,16 @@ async function fetchMenu(rest){
     })
 
 }
+
 //need to be changed accordingly once API is ready
+
 async function fetchFilter(filter){
     let q="";
     if(filter === "rating"){
         q= "raring 4.5";
     }
     // else if( q === "" ){
-// 
+    // 
     // }
     return new Promise((resolve, reject) => {
 
@@ -369,13 +375,6 @@ const Main = () => {
     
 
     }, [])
-
-    
-    // async function fetchTodos() {
-    //     try {
-    //       const todoData = await API.graphql(graphqlOperation(listTodos))
-    //      } catch (err) { console.log('error fetching todos') }
-    //   }
 
     return (
         <div className="Main-cont">

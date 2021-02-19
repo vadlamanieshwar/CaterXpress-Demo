@@ -25,7 +25,7 @@ function App() {
           <HeaderNext />
           <Switch>
             <Route path="/" exact render={props => <Main {...props}/>}  />
-            <Route path="/restaurant" render={props => <RestaurantMenu {...props}/>} />
+            <Route path="/restaurant/:id" render={props => <RestaurantMenu {...props}/>} />
             <Route path="/payment" render={props => <Payment {...props}/>} />
             <Route path="/myorders" render={props => <MyOrders {...props}/>} />
             <Route path="/rating" render={props => <Ratings {...props}/>} />
