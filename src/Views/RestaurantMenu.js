@@ -15,10 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import ItemModal from "./ItemModal";
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import restBack from '../Assets/img/restBack.png';
-import mcrib from '../Assets/img/mcrib.png';
-import nug from '../Assets/img/nug.png';
-import cake from '../Assets/img/cake.png';
-import fries from '../Assets/img/fries.png';
+import loader1 from '../Assets/img/loader1.gif';
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -212,7 +209,13 @@ const RestaurantMenu = ({match}) => {
                 </div>
             </div>
         
-            :"loading"}
+            :
+
+            <div className="menu-loader">
+                <img src={loader1} alt="loading"/>
+            </div>
+
+            }
         </div>
         <Modal
             open={open}

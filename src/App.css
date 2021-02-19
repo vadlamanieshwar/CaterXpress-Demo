@@ -311,6 +311,25 @@ opacity: 1;
   top: 5px;
 }
 
+.submit-button{
+  color: "white";
+  margin-top:16px;
+  width:100px;
+  height:30px;
+  background: "linear-gradient(to right, #DB750A , #DB4300)";
+  border-radius:14px;
+  border:none;
+
+}
+.submit-button:disabled{
+  margin: 16px;
+  width: 100px;
+  height: 30px;
+  border-radius:14px;
+  border: none;
+  background-image: linear-gradient(to right, #d5cbc0, rgb(183 160 150));
+  color: #1B2430;
+}
 /* amplify sign out css */
 
 amplify-sign-out{
@@ -330,7 +349,9 @@ amplify-sign-out{
   flex-direction: column;
   justify-content: flex-end;
 }
-
+.menu-loader{
+  text-align: center;
+}
 /* Body css corrections */
 
 a:hover{

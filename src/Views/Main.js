@@ -111,7 +111,7 @@ const FoodOptions = () => {
         <div className="option-sec-cont">
                 {/* can map all these by storing in state or getting from api */}
                 <div className="opt-food">
-                    <Link to="/restaurant">
+                    <Link to="/restaurant/Example Burger">
                     <img src={option1} alt="Burgers"
                     onClick={
                         ()=>{
@@ -372,7 +372,10 @@ const Main = () => {
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
     })
-    
+    // axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/product?restaurant_name=Example Mexican")
+    // .then(res => {
+    //     console.log(res.data)
+    // })
 
     }, [])
 

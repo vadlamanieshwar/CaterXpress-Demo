@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
+import { Card, InputBase, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useSelector,  useDispatch } from "react-redux";
@@ -57,7 +57,7 @@ const useStyles = makeStyles({
 const Ratings = () => {
     const [value, setValue] = React.useState(0);
     const classes = useStyles();
-    const [data, setData] = React.useState({});
+    const [comment, setComment] = React.useState("");
     const review = useSelector(getReviews) || [];
     const reviews = [
         {
@@ -116,6 +116,31 @@ const Ratings = () => {
                                 className="rating-box"
                                 />
                             </Box>
+                        </div>
+                        <div style={{display:"flex"}}>
+
+                            <Paper style={{height:"fit-content",margin:"15px"}}>
+
+                                <InputBase
+                                    // className={classes.input}
+                                    placeholder="    Your Comments..."
+                                    onChange={(event, newValue) => {
+                                        setComment(newValue);
+                                    }}
+                                    value={comment}
+                                    // inputProps={{ 'aria-label': 'search' }}
+                                />          
+                            
+                            </Paper> 
+                            <Link to="/">
+                            <button
+                                className="submit-button"
+                                onClick={()=>{
+                                    console.log("if needed details can be added to DB Example Burger",value,comment)
+                                }}
+                                disabled={value===0?true:false}
+                            >Submit</button>    
+                            </Link>         
                         </div>
                     </div>
                     <div className="remove-sec">
