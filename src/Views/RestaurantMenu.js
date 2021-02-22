@@ -16,6 +16,10 @@ import ItemModal from "./ItemModal";
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import restBack from '../Assets/img/restBack.png';
 import loader1 from '../Assets/img/loader1.gif';
+import nug from '../Assets/img/nug.png';
+import fries from '../Assets/img/fries.png';
+import cake from '../Assets/img/cake.png';
+import mcrib from '../Assets/img/mcrib.png';
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -150,7 +154,19 @@ const RestaurantMenu = ({match}) => {
                     <h3>Signature Dish</h3>
                     <div className={classes.mostPopular}>
                     {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
-
+                        let url;
+                        if(cm.pname === "McRib Meal"){
+                            url=mcrib;
+                        }
+                        else if(cm.pname === "40 McNuggets"){
+                            url=nug;
+                        }
+                        else if(cm.pname === "Medium French Fries"){
+                            url=fries;
+                        }
+                        else if(cm.pname === "Cake"){
+                            url=cake;
+                        }
                         return <Card className={classes.root}  onClick={()=>{
                             if(cm.pname === "McRib Meal"){
                                 handleOpen();
@@ -174,7 +190,7 @@ const RestaurantMenu = ({match}) => {
                             </div>
                             <CardMedia
                                 className={classes.cover}
-                                image={cm.url}
+                                image={url}
                                 title="media"
                             />
                         </Card>
