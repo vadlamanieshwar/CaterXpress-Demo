@@ -20,6 +20,10 @@ import nug from '../Assets/img/nug.png';
 import fries from '../Assets/img/fries.png';
 import cake from '../Assets/img/cake.png';
 import mcrib from '../Assets/img/mcrib.png';
+import m1 from '../Assets/img/m1.png';
+import m2 from '../Assets/img/m2.png';
+import m3 from '../Assets/img/m3.png';
+import m4 from '../Assets/img/m4.png';
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -109,9 +113,9 @@ const useStyles = makeStyles((theme) => ({
 const RestaurantMenu = ({match}) => {
     // const dispatch = useDispatch();
     const res = match.params.id;
-    console.log(res);
     const classes = useStyles();
     const menu = useSelector(getRestMenu) || {};
+    console.log(res,menu);
     const [open,setOpen] = useState(false);
     const [clicked,setClicked] = useState({})
     const handleOpen = () => {
@@ -166,6 +170,18 @@ const RestaurantMenu = ({match}) => {
                         }
                         else if(cm.pname === "Cake"){
                             url=cake;
+                        }
+                        else if(cm.pname === "Horchata"){
+                            url=m1;
+                        }
+                        else if(cm.pname === "Carnitas Huevos Rancheros"){
+                            url=m2;
+                        }
+                        else if(cm.pname === "Chicken Tamales"){
+                            url=m3;
+                        }
+                        else if(cm.pname === "Mole Poblano"){
+                            url=m4;
                         }
                         return <Card className={classes.root}  onClick={()=>{
                             if(cm.pname === "McRib Meal"){

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropDownCircleSharpIcon from '@material-ui/icons/ArrowDropDownCircleSharp';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 // import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import { Card, CardContent, Typography, Button } from '@material-ui/core';
 import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -276,8 +276,13 @@ const FilteredMenu = ( props ) => {
                     <Card>
                         <div className={classes.flex}>
                             {fil.img.map((im,idx) => {
-                                if(fil.category === "Example Burger"){
-                                    // remove "s" once the data changed by ashley ------------------------
+                                if(fil.category === "Example Cafe"){
+                                    return <img
+                                    className={classes.media}
+                                    src={im}
+                                    alt={fil.category}
+                                />                                    
+                                }else{
                                     return <Link to={"/restaurant/"+fil.category}>
                                     <img
                                         className={classes.media}
@@ -285,6 +290,7 @@ const FilteredMenu = ( props ) => {
                                         alt={fil.category}
                                         onClick={
                                             ()=>{
+                                                console.log(fil.category)
                                                 fetchMenu(fil.category).then(res => {
                                                     dispatch(restMenuSlice.actions.addMenu(res));
                                                 })                                       
@@ -292,18 +298,13 @@ const FilteredMenu = ( props ) => {
                                         }
                                     />
                                 </Link>
-                                }else{
-                                    return <img
-                                    className={classes.media}
-                                    src={im}
-                                    alt={fil.category}
-                                />
+                                    
                                 }
                                 
                             })}
                         </div>
                     <CardContent>
-                        <Typography style={{textAlign:"initial", paddingBottom:"0"}} gutterBottom variant="h5" component="h2">
+                        <Typography style={{textAlign:"initial", paddingBottom:"0", fontSize: "18px",fontWeight: "600"}} gutterBottom variant="h5" component="h2">
                             {fil.category}
                         </Typography>
                         <div className={classes.filterContent}>
@@ -326,13 +327,13 @@ const FilteredMenu = ( props ) => {
 }
 
 async function fetchMenu(rest){
-    let q="";
+    let q = "";
     if(rest === "Example Burger"){
-        q= "Example%20Burger";
+        q = "Example%20Burger";
     }
-    // else if( q === "" ){
-    // 
-    // }
+    else if( rest === "Example Mexican" ){
+        q = "Example%20Mexican";
+    }
     return new Promise((resolve, reject) => {
 
      axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=" + q)
@@ -388,9 +389,19 @@ const Main = () => {
             
             <div className="food-sec-cont">
                 {/* use router once the API done */}
+                {/* <Router> */}
 
                 <Filter setFilter={setFilter} sel={filter.sel} filter={filter.filter}/>
+                {/* <Switch> */}
+
+                {/* <Route path="/filter/:id" render={props => <FilteredMenu {...props}/>} /> */}
+                {/* <Route path="/mainmenu" render={props => <MainManu {...props}/>} /> */}
+
+                {/* </Switch> */}
                 { !filter.sel ? <MainMenu setFilter={setFilter} sel={filter.sel}/> : <FilteredMenu filter={filter} /> }
+
+
+                {/* </Router> */}
 
             </div>
         </div>
