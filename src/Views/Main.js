@@ -15,6 +15,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 // imports from downloads
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
+import filterSlice, { getFilter } from "../store/slices/filter";
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
 import option1 from '../Assets/img/option1.svg';
@@ -25,10 +26,12 @@ import option5 from '../Assets/img/option5.svg';
 import option6 from '../Assets/img/option6.svg';
 import option7 from '../Assets/img/option7.png';
 import option8 from '../Assets/img/option8.png';
+import exCafe2 from '../Assets/img/exCafe2.png';
+import exCafe from '../Assets/img/exCafe.png';
 import { ReactComponent as Icon } from '../Assets/img/options.svg';
 import { Menu, FilterMenu } from '../Data/Data';
 import reviewsSlice from "../store/slices/reviews";
-
+import loader1 from '../Assets/img/loader1.gif';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -180,6 +183,7 @@ const Ad = () => (
 
 const Filter = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     return(
         <div className="food-filter">
@@ -190,9 +194,9 @@ const Filter = (props) => {
                         onClick={()=>{
                             // need to call fetchFilter() to display from DB over 4.5 ratings
                             // dispatch to filtered menu slice which need to be created
-                            // fetchMenu("rating").then(res => {
-                                // dispatch(filterSlice.actions.addFilter(res));
-                            // })
+                            fetchFilter("rating").then(res => {
+                                dispatch(filterSlice.actions.addFilter(res));
+                            })
                             if(props.sel && props.filter !== "rate"){
                                 props.setFilter({filter:"rate",sel:props.sel});
                             }
@@ -267,37 +271,52 @@ const FilteredMenu = ( props ) => {
     // get filtered menu from store
     const filMenu = FilterMenu.data
     const classes = useStyles();
+    const filter = useSelector(getFilter) || {};
+    console.log(filter)
 
     return(
         // add loading till you get filMenu from store
-        <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
-            {filMenu.map((fil,i) => (
+        <div>
+            { Object.keys(filter).length>0?
+            
+            <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
+            {filter.filter.map((fil,i) => (
                 <div className={classes.filteredMenuCont}>
                     <Card>
                         <div className={classes.flex}>
-                            {fil.img.map((im,idx) => {
-                                if(fil.category === "Example Cafe"){
-                                    return <img
-                                    className={classes.media}
-                                    src={im}
-                                    alt={fil.category}
-                                />                                    
-                                }else{
-                                    return <Link to={"/restaurant/"+fil.category}>
+                            {/* fil.foodImages */}
+                            {fil.foodImages.map((im,idx) => {
+                                if(fil.name === "Example Burger" || fil.name === "Example Mexican"){
+                                    return <Link to={"/restaurant/"+fil.name}>
                                     <img
                                         className={classes.media}
-                                        src={im}
-                                        alt={fil.category}
+                                        src={im.url}
+                                        alt={fil.name}
                                         onClick={
                                             ()=>{
-                                                console.log(fil.category)
-                                                fetchMenu(fil.category).then(res => {
+                                                console.log(fil.name)
+                                                fetchMenu(fil.name).then(res => {
                                                     dispatch(restMenuSlice.actions.addMenu(res));
                                                 })                                       
                                             }
                                         }
                                     />
-                                </Link>
+                                </Link>                               
+                                }else{
+                                    if(idx === 0){
+                                        return <img
+                                        className={classes.media}
+                                        src={exCafe2}
+                                        alt={fil.name}
+                                    />  
+                                    }else{
+                                        return <img
+                                        className={classes.media}
+                                        src={exCafe}
+                                        alt={fil.name}
+                                    />  
+                                    }
+                                       
                                     
                                 }
                                 
@@ -305,24 +324,87 @@ const FilteredMenu = ( props ) => {
                         </div>
                     <CardContent>
                         <Typography style={{textAlign:"initial", paddingBottom:"0", fontSize: "18px",fontWeight: "600"}} gutterBottom variant="h5" component="h2">
-                            {fil.category}
+                            {fil.name}
+                            {/* fil.name */}
                         </Typography>
                         <div className={classes.filterContent}>
-                            <div>$. {fil.available}</div>
-                            <div>{fil.time} mins</div>
+                            <div>$. {fil.type1}, {fil.type2}</div>
+                            <div>{fil.orderinfo[0].delivertime} mins</div>
                         </div>
                         <div className={classes.filterContent}>
                             <div className={classes.flex}>
-                                <div style={{marginRight: "20px"}}>{fil.ratings}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
-                                <div>{fil.reviews}+ Reviews</div>
+                                <div style={{marginRight: "20px"}}>{fil.orderinfo[0].rating}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
+                                <div>{fil.orderinfo[0].reviewno}+ Reviews</div>
                             </div>
-                            <div>${fil.delivery} Delivery</div>
+                            <div>${fil.orderinfo[0].deliveryfee} Delivery</div>
                         </div>
                     </CardContent>
                     </Card>
                 </div>
             ))}
-        </div>
+        </div>            
+            :
+    
+            <div className="menu-loader">
+                <img src={loader1} alt="loading"/>
+            </div>
+        }
+    </div>
+        // <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
+        //     {filMenu.map((fil,i) => (
+        //         <div className={classes.filteredMenuCont}>
+        //             <Card>
+        //                 <div className={classes.flex}>
+        //                     {/* fil.foodImages */}
+        //                     {fil.img.map((im,idx) => {
+        //                         if(fil.category === "Example Cafe"){
+        //                             return <img
+        //                             className={classes.media}
+        //                             src={im}
+        //                             alt={fil.category}
+        //                         />                                    
+        //                         }else{
+        //                             return <Link to={"/restaurant/"+fil.category}>
+        //                             <img
+        //                                 className={classes.media}
+        //                                 src={im}
+        //                                 alt={fil.category}
+        //                                 onClick={
+        //                                     ()=>{
+        //                                         console.log(fil.category)
+        //                                         fetchMenu(fil.category).then(res => {
+        //                                             dispatch(restMenuSlice.actions.addMenu(res));
+        //                                         })                                       
+        //                                     }
+        //                                 }
+        //                             />
+        //                         </Link>
+                                    
+        //                         }
+                                
+        //                     })}
+        //                 </div>
+        //             <CardContent>
+        //                 <Typography style={{textAlign:"initial", paddingBottom:"0", fontSize: "18px",fontWeight: "600"}} gutterBottom variant="h5" component="h2">
+        //                     {fil.category}
+        //                     {/* fil.name */}
+        //                 </Typography>
+        //                 <div className={classes.filterContent}>
+        //                     <div>$. {fil.available}</div>
+        //                     <div>{fil.time} mins</div>
+        //                 </div>
+        //                 <div className={classes.filterContent}>
+        //                     <div className={classes.flex}>
+        //                         <div style={{marginRight: "20px"}}>{fil.ratings}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
+        //                         <div>{fil.reviews}+ Reviews</div>
+        //                     </div>
+        //                     <div>${fil.delivery} Delivery</div>
+        //                 </div>
+        //             </CardContent>
+        //             </Card>
+        //         </div>
+        //     ))}
+        // </div>
     );
 }
 
@@ -354,7 +436,7 @@ async function fetchFilter(filter){
     // }
     return new Promise((resolve, reject) => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/"+ q)
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/filter")
         .then(res => resolve(res.data))
     })
 

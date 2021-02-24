@@ -1,6 +1,6 @@
 // imports from downloads
-import { useSelector } from "react-redux";
-import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 // local imports
 import ItemModal from "./ItemModal";
@@ -111,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const RestaurantMenu = ({match}) => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const res = match.params.id;
     const classes = useStyles();
     const menu = useSelector(getRestMenu) || {};
@@ -125,6 +126,28 @@ const RestaurantMenu = ({match}) => {
       const handleClose = () => {
         setOpen(false);
       };
+      const fetchMenu = () => {
+        let q = "";
+        if(res === "Example Burger"){
+            q = "Example%20Burger";
+        }
+        else if( res === "Example Mexican" ){
+            q = "Example%20Mexican";
+        }
+        return new Promise((resolve, reject) => {
+    
+         axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=" + q)
+        .then(res => resolve(res.data))
+        })
+    
+    };
+    useEffect(() => {
+        fetchMenu().then(res => {
+            dispatch(restMenuSlice.actions.addMenu(res));
+            // console.log(res);
+        })                                       
+}, [])
+    
     return(<div>
         <div>{Object.keys(menu).length > 0?
         
