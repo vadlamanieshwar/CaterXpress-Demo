@@ -4,13 +4,16 @@ const addMenu = ( state, action ) =>{
     state.restMenu = action.payload;
 }
 
+const   initialState = {};
+
 const restMenu = createSlice({
 
   name         : "restMenu",
   initialState : {},
   reducers     : {
 
-    addMenu : addMenu
+    addMenu : addMenu,
+    removeMenu : () => {return initialState}
 
   }
   

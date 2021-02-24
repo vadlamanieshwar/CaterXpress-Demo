@@ -6,11 +6,12 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 import itemSlice, { getItems } from "../store/slices/items";
+import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import { getCart } from "../store/slices/cart";
 import logo from '../Assets/img/logo.svg';
 import home from '../Assets/img/home.png';
@@ -50,6 +51,7 @@ const useStyles = makeStyles({
 
 export default function HeaderNext() {
     const items = useSelector(getItems) || [];
+    const dispatch = useDispatch();
     const classes = useStyles();
     const no = useSelector(getCart) || 0;
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -158,7 +160,12 @@ export default function HeaderNext() {
                     </div>
                     <div style={{paddingBlockStart:"20px"}}>
                         <Link to="/">
-                            <img src={logo} alt="caterxpress"></img>
+                            <img src={logo} alt="caterxpress"
+                            onClick={()=>{
+
+                                dispatch(restMenuSlice.actions.removeMenu());
+
+                            }}></img>
                         </Link>
                     </div>
                     <div style={{paddingBlockStart:"25px"}}>

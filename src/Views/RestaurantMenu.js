@@ -25,6 +25,7 @@ import m1 from '../Assets/img/m1.png';
 import m2 from '../Assets/img/m2.png';
 import m3 from '../Assets/img/m3.png';
 import m4 from '../Assets/img/m4.png';
+import m8 from '../Assets/img/m8.png';
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -116,7 +117,7 @@ const RestaurantMenu = ({match}) => {
     const res = match.params.id;
     const classes = useStyles();
     const menu = useSelector(getRestMenu) || {};
-    console.log(res,menu);
+    // console.log(res,menu);
     const [open,setOpen] = useState(false);
     const [clicked,setClicked] = useState({})
     const handleOpen = () => {
@@ -181,7 +182,7 @@ const RestaurantMenu = ({match}) => {
                     <h3>Signature Dish</h3>
                     <div className={classes.mostPopular}>
                     {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
-                        let url;
+                        let url=cm.url;
                         if(cm.pname === "McRib Meal"){
                             url=mcrib;
                         }
@@ -194,22 +195,21 @@ const RestaurantMenu = ({match}) => {
                         else if(cm.pname === "Cake"){
                             url=cake;
                         }
-                        else if(cm.pname === "Horchata"){
-                            url=m1;
-                        }
-                        else if(cm.pname === "Carnitas Huevos Rancheros"){
-                            url=m2;
-                        }
-                        else if(cm.pname === "Chicken Tamales"){
-                            url=m3;
-                        }
-                        else if(cm.pname === "Mole Poblano"){
-                            url=m4;
-                        }
+                        // else if(cm.pname === "Horchata"){
+                        //     url=m1;
+                        // }
+                        // else if(cm.pname === "Carnitas Huevos Rancheros"){
+                        //     url=m2;
+                        // }
+                        // else if(cm.pname === "Chicken Tamales"){
+                        //     url=m3;
+                        // }
+                        // else if(cm.pname === "Mole Poblano"){
+                        //     url=m4;
+                        // }
                         return <Card className={classes.root}  onClick={()=>{
                             if(cm.pname === "McRib Meal"){
                                 handleOpen();
-                                console.log({...cm,restaurant:menu.restMenu[res][0]["name"]})
                                 setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
                             }
                         }}>
@@ -241,25 +241,39 @@ const RestaurantMenu = ({match}) => {
                     <h3>Combo Meals</h3>
                     <div className={classes.comboMeals}>
 
-                        {menu.restMenu[res][0]["Combo Meals"].map( (cm,idx) => (
-                            <Card className={classes.root}>
-                                <div className={classes.details}>
-                                    <CardContent className={classes.content}>
-                                    <Typography component="h5" variant="h5">
-                                        {cm.pname}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
-                                        {cm.cal}<br/>${cm.price}
-                                    </Typography>
-                                    </CardContent>
-                                </div>
-                                <CardMedia
-                                    className={classes.cover}
-                                    image={cm.url}
-                                    title="food images"
-                                />
-                            </Card>
-                        ) )}
+                        {menu.restMenu[res][0]["Combo Meals"].map( (cm,idx) => {
+                            let url=cm.url;
+                            if(cm.pname === "McRib Meal"){
+                                url=mcrib;
+                            }
+                            else if(cm.pname === "40 McNuggets"){
+                                url=m1;
+                            }
+                            else if(cm.pname === "Medium French Fries"){
+                                url=m2;
+                            }
+                            else if(cm.pname === "Cake"){
+                                url=m8;
+                            }
+                            return    <Card className={classes.root}>
+                            <div className={classes.details}>
+                                <CardContent className={classes.content}>
+                                <Typography component="h5" variant="h5">
+                                    {cm.pname}
+                                </Typography>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {cm.cal}<br/>${cm.price}
+                                </Typography>
+                                </CardContent>
+                            </div>
+                            <CardMedia
+                                className={classes.cover}
+                                image={url}
+                                title="food images"
+                            />
+                        </Card> 
+                        }
+                    )}
                     </div>                
                 </div>
             </div>
