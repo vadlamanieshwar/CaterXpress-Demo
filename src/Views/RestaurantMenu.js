@@ -25,6 +25,9 @@ import m1 from '../Assets/img/m1.png';
 import m2 from '../Assets/img/m2.png';
 import m3 from '../Assets/img/m3.png';
 import m4 from '../Assets/img/m4.png';
+import m5 from '../Assets/img/m5.png';
+import m6 from '../Assets/img/m6.png';
+import m7 from '../Assets/img/m7.png';
 import m8 from '../Assets/img/m8.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -184,16 +187,16 @@ const RestaurantMenu = ({match}) => {
                     {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
                         let url=cm.url;
                         if(cm.pname === "McRib Meal"){
-                            url=mcrib;
+                            url=m5;
                         }
                         else if(cm.pname === "40 McNuggets"){
-                            url=nug;
+                            url=m6;
                         }
                         else if(cm.pname === "Medium French Fries"){
-                            url=fries;
+                            url=m7;
                         }
                         else if(cm.pname === "Cake"){
-                            url=cake;
+                            url=m8;
                         }
                         // else if(cm.pname === "Horchata"){
                         //     url=m1;
@@ -244,13 +247,13 @@ const RestaurantMenu = ({match}) => {
                         {menu.restMenu[res][0]["Combo Meals"].map( (cm,idx) => {
                             let url=cm.url;
                             if(cm.pname === "McRib Meal"){
-                                url=mcrib;
+                                url=m5;
                             }
                             else if(cm.pname === "40 McNuggets"){
-                                url=m1;
+                                url=m6;
                             }
                             else if(cm.pname === "Medium French Fries"){
-                                url=m2;
+                                url=m7;
                             }
                             else if(cm.pname === "Cake"){
                                 url=m8;

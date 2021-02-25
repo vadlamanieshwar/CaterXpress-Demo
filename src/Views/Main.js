@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowDropDownCircleSharpIcon from '@material-ui/icons/ArrowDropDownCircleSharp';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
-// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { Link, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button } from '@material-ui/core';
 import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -28,6 +28,8 @@ import option7 from '../Assets/img/option7.png';
 import option8 from '../Assets/img/option8.png';
 import exCafe2 from '../Assets/img/exCafe2.png';
 import exCafe from '../Assets/img/exCafe.png';
+import it1 from '../Assets/img/it1.png';
+import it2 from '../Assets/img/it2.png';
 import { ReactComponent as Icon } from '../Assets/img/options.svg';
 import { Menu, FilterMenu } from '../Data/Data';
 import reviewsSlice from "../store/slices/reviews";
@@ -102,6 +104,11 @@ const useStyles = makeStyles((theme) => ({
       filteredMenuCont:{
           paddingBlockStart: 10,
           paddingBlockEnd: 10
+      },
+      filteredMenuCont2:{
+          paddingBlockStart: 10,
+          paddingBlockEnd: 10,
+          backgroundColor: "antiquewhite"
       }
   }));
 
@@ -190,18 +197,26 @@ const Filter = (props) => {
                     {/* <Link to='/filter/rate'> */}
                     <Button 
                         className={classes.chip} 
+                        style={{ backgroundColor:"antiquewhite"}}
                         variant="outlined"
                         onClick={()=>{
                             // need to call fetchFilter() to display from DB over 4.5 ratings
                             // dispatch to filtered menu slice which need to be created
-                            fetchFilter("rating").then(res => {
-                                dispatch(filterSlice.actions.addFilter(res));
-                            })
-                            if(props.sel && props.filter !== "rate"){
-                                props.setFilter({filter:"rate",sel:props.sel});
-                            }
-                            else{
+                            if(props.sel){
+                                if(props.filter === "rate"){
+                                    props.setFilter({filter:"",sel:!props.sel});
+                                    dispatch(filterSlice.actions.removeFilter());
+                                }else{
+                                    props.setFilter({filter:"rate",sel:props.sel});
+                                    fetchFilter("rating").then(res => {
+                                        dispatch(filterSlice.actions.addFilter(res));
+                                    })        
+                                }
+                            }else{
                                 props.setFilter({filter:"rate",sel:!props.sel});
+                                fetchFilter("rating").then(res => {
+                                    dispatch(filterSlice.actions.addFilter(res));
+                                })    
                             }
                         }} 
                         endIcon={<div><StarOutlineIcon className={classes.starColor} /><ArrowDropDownCircleSharpIcon /></div>}>
@@ -210,17 +225,33 @@ const Filter = (props) => {
                     {/* </Link> */}
                     <Button className={classes.chip} variant="outlined">Under 30 min</Button>
                     <Button className={classes.chip} variant="outlined">Vegetarian</Button>
-                    <Button className={classes.chip} variant="outlined" endIcon={<ArrowDropDownCircleSharpIcon />}>$$$</Button>
-                    <Button className={classes.chip} variant="outlined"
-                    onClick={()=>{
-                        if(props.sel && props.filter !== "rate"){
-                            props.setFilter({filter:"rate",sel:props.sel});
+                    {/* <Link to='/filter/price'> */}
+                    <Button
+                     className={classes.chip}
+                     style={{ backgroundColor:"antiquewhite"}}
+                     variant="outlined"
+                     endIcon={<ArrowDropDownCircleSharpIcon />}
+                     onClick={()=>{
+                        if(props.sel){
+                            if(props.filter === "price"){
+                                props.setFilter({filter:"",sel:!props.sel});
+                                dispatch(filterSlice.actions.removeFilter());
+                            }else{
+                                props.setFilter({filter:"price",sel:props.sel});
+                                fetchFilter("price").then(res => {
+                                    dispatch(filterSlice.actions.addFilter(res));
+                                })        
+                            }
+                        }else{
+                            props.setFilter({filter:"price",sel:!props.sel});
+                            fetchFilter("price").then(res => {
+                                dispatch(filterSlice.actions.addFilter(res));
+                            })    
                         }
-                        else{
-                            props.setFilter({filter:"rate",sel:!props.sel});
-                        }
-                    }} 
-                    >New</Button>
+                     }}
+                     >Under 20$</Button>
+                     {/* </Link> */}
+                    <Button className={classes.chip} variant="outlined">New</Button>
                     <Button className={classes.chip} variant="outlined">Group Order</Button>
                 </div>
                 
@@ -280,69 +311,82 @@ const FilteredMenu = ( props ) => {
             { Object.keys(filter).length>0?
             
             <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
-            {filter.filter.map((fil,i) => (
-                <div className={classes.filteredMenuCont}>
-                    <Card>
-                        <div className={classes.flex}>
-                            {/* fil.foodImages */}
-                            {fil.foodImages.map((im,idx) => {
-                                if(fil.name === "Example Burger" || fil.name === "Example Mexican"){
-                                    return <Link to={"/restaurant/"+fil.name}>
-                                    <img
-                                        className={classes.media}
-                                        src={im.url}
-                                        alt={fil.name}
-                                        onClick={
-                                            ()=>{
-                                                console.log(fil.name)
-                                                fetchMenu(fil.name).then(res => {
-                                                    dispatch(restMenuSlice.actions.addMenu(res));
-                                                })                                       
+            {filter.filter.map((fil,i) => {
+                let c="";
+                if(fil.name === "Example Burger" || fil.name === "Example Mexican"){
+                    c = classes.filteredMenuCont2;
+                }
+                    return <div className={classes.filteredMenuCont}>
+                                <Card className={c}>
+                                    <div className={classes.flex}>
+                                        {/* fil.foodImages */}
+                                        {fil.foodImages.map((im,idx) => {
+                                            if(fil.name === "Example Burger" || fil.name === "Example Mexican"){
+                                                return <Link to={"/restaurant/"+fil.name}>
+                                                <img
+                                                    className={classes.media}
+                                                    src={im.url}
+                                                    alt={fil.name}
+                                                    onClick={
+                                                        ()=>{
+                                                            console.log(fil.name)
+                                                            fetchMenu(fil.name).then(res => {
+                                                                dispatch(restMenuSlice.actions.addMenu(res));
+                                                            })                                       
+                                                        }
+                                                    }
+                                                />
+                                            </Link>                               
+                                            }else{
+                                                if(fil.name === "Example Cafe"){
+                                                    return <img
+                                                        className={classes.media}
+                                                        src={im.url}
+                                                        alt={fil.name}
+                                                    /> 
+                                                
+                                                } else{
+                                                    if(idx === 0){
+                                                        return <img
+                                                        className={classes.media}
+                                                        src={it1}
+                                                        alt={fil.name}
+                                                    />  
+                                                    }else{
+                                                        return <img
+                                                        className={classes.media}
+                                                        src={it2}
+                                                        alt={fil.name}
+                                                    />  
+                                                    }
+                                                }                                  
+                                                
                                             }
-                                        }
-                                    />
-                                </Link>                               
-                                }else{
-                                    if(idx === 0){
-                                        return <img
-                                        className={classes.media}
-                                        src={exCafe2}
-                                        alt={fil.name}
-                                    />  
-                                    }else{
-                                        return <img
-                                        className={classes.media}
-                                        src={exCafe}
-                                        alt={fil.name}
-                                    />  
-                                    }
-                                       
-                                    
-                                }
-                                
-                            })}
-                        </div>
-                    <CardContent>
-                        <Typography style={{textAlign:"initial", paddingBottom:"0", fontSize: "18px",fontWeight: "600"}} gutterBottom variant="h5" component="h2">
-                            {fil.name}
-                            {/* fil.name */}
-                        </Typography>
-                        <div className={classes.filterContent}>
-                            <div>$. {fil.type1}, {fil.type2}</div>
-                            <div>{fil.orderinfo[0].delivertime} mins</div>
-                        </div>
-                        <div className={classes.filterContent}>
-                            <div className={classes.flex}>
-                                <div style={{marginRight: "20px"}}>{fil.orderinfo[0].rating}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
-                                <div>{fil.orderinfo[0].reviewno}+ Reviews</div>
+                                            
+                                        })}
+                                    </div>
+                                <CardContent>
+                                    <Typography style={{textAlign:"initial", paddingBottom:"0", fontSize: "18px",fontWeight: "600"}} gutterBottom variant="h5" component="h2">
+                                        {fil.name}
+                                        {/* fil.name */}
+                                    </Typography>
+                                    <div className={classes.filterContent}>
+                                        <div>$. {fil.type1}, {fil.type2}</div>
+                                        <div>{fil.orderinfo[0].delivertime} mins</div>
+                                    </div>
+                                    <div className={classes.filterContent}>
+                                        <div className={classes.flex}>
+                                            <div style={{marginRight: "20px"}}>{fil.orderinfo[0].rating}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
+                                            <div>{fil.orderinfo[0].reviewno}+ Reviews</div>
+                                        </div>
+                                        <div>${fil.orderinfo[0].deliveryfee} Delivery</div>
+                                    </div>
+                                </CardContent>
+                                </Card>
                             </div>
-                            <div>${fil.orderinfo[0].deliveryfee} Delivery</div>
-                        </div>
-                    </CardContent>
-                    </Card>
-                </div>
-            ))}
-        </div>            
+                
+                })}
+            </div>            
             :
     
             <div className="menu-loader">
@@ -350,61 +394,6 @@ const FilteredMenu = ( props ) => {
             </div>
         }
     </div>
-        // <div style={{paddingTop: "40px",paddingBottom: "40px"}}>
-        //     {filMenu.map((fil,i) => (
-        //         <div className={classes.filteredMenuCont}>
-        //             <Card>
-        //                 <div className={classes.flex}>
-        //                     {/* fil.foodImages */}
-        //                     {fil.img.map((im,idx) => {
-        //                         if(fil.category === "Example Cafe"){
-        //                             return <img
-        //                             className={classes.media}
-        //                             src={im}
-        //                             alt={fil.category}
-        //                         />                                    
-        //                         }else{
-        //                             return <Link to={"/restaurant/"+fil.category}>
-        //                             <img
-        //                                 className={classes.media}
-        //                                 src={im}
-        //                                 alt={fil.category}
-        //                                 onClick={
-        //                                     ()=>{
-        //                                         console.log(fil.category)
-        //                                         fetchMenu(fil.category).then(res => {
-        //                                             dispatch(restMenuSlice.actions.addMenu(res));
-        //                                         })                                       
-        //                                     }
-        //                                 }
-        //                             />
-        //                         </Link>
-                                    
-        //                         }
-                                
-        //                     })}
-        //                 </div>
-        //             <CardContent>
-        //                 <Typography style={{textAlign:"initial", paddingBottom:"0", fontSize: "18px",fontWeight: "600"}} gutterBottom variant="h5" component="h2">
-        //                     {fil.category}
-        //                     {/* fil.name */}
-        //                 </Typography>
-        //                 <div className={classes.filterContent}>
-        //                     <div>$. {fil.available}</div>
-        //                     <div>{fil.time} mins</div>
-        //                 </div>
-        //                 <div className={classes.filterContent}>
-        //                     <div className={classes.flex}>
-        //                         <div style={{marginRight: "20px"}}>{fil.ratings}<StarOutlineIcon style={{ fontSize: 15, paddingInlineStart: 3, marginBlockEnd: 3 }} /></div>
-        //                         <div>{fil.reviews}+ Reviews</div>
-        //                     </div>
-        //                     <div>${fil.delivery} Delivery</div>
-        //                 </div>
-        //             </CardContent>
-        //             </Card>
-        //         </div>
-        //     ))}
-        // </div>
     );
 }
 
@@ -429,14 +418,14 @@ async function fetchMenu(rest){
 async function fetchFilter(filter){
     let q="";
     if(filter === "rating"){
-        q= "raring 4.5";
+        q= "filter";
     }
-    // else if( q === "" ){
-    // 
-    // }
+    else if( filter === "price" ){
+        q = "price"
+    }
     return new Promise((resolve, reject) => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/filter")
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/" + q)
         .then(res => resolve(res.data))
     })
 
@@ -471,13 +460,13 @@ const Main = () => {
             
             <div className="food-sec-cont">
                 {/* use router once the API done */}
-                {/* <Router> */}
+                 {/* <Router> */}
 
                 <Filter setFilter={setFilter} sel={filter.sel} filter={filter.filter}/>
                 {/* <Switch> */}
 
                 {/* <Route path="/filter/:id" render={props => <FilteredMenu {...props}/>} /> */}
-                {/* <Route path="/mainmenu" render={props => <MainManu {...props}/>} /> */}
+                {/* <Route path="/" render={props => <MainMenu {...props}/>} /> */}
 
                 {/* </Switch> */}
                 { !filter.sel ? <MainMenu setFilter={setFilter} sel={filter.sel}/> : <FilteredMenu filter={filter} /> }
