@@ -367,3 +367,13 @@ a:hover{
 button:focus {
   outline: none;
 }
+
+/* custom login css */
+
+.sign-in{
+  background: transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box;
+  border-radius: 100px;
+  width: 100px;
+  color: white;
+  
+}

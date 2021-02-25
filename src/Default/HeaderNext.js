@@ -19,6 +19,7 @@ import pickup from '../Assets/img/pickup.png';
 import offers from '../Assets/img/offers.png';
 import myorders from '../Assets/img/myorders.png';
 import signout from '../Assets/img/signout.png';
+import { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles({
     list: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles({
     }
   });
 
-export default function HeaderNext() {
+export default function HeaderNext( props ) {
     const items = useSelector(getItems) || [];
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -155,7 +156,9 @@ export default function HeaderNext() {
                             <MenuItem className={classes.navItem} onClick={handleClose}><img src={pickup} alt="pick up"/>&nbsp;&nbsp;<div className={classes.navText}>Pick up</div></MenuItem><hr/>
                             <MenuItem className={classes.navItem} onClick={handleClose}><img src={offers} alt="offers"/>&nbsp;&nbsp;<div className={classes.navText}>Offers</div></MenuItem><hr/>
                             <Link to="/myorders"><MenuItem className={classes.navItem} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;<div className={classes.navText}>My Orders</div></MenuItem></Link><hr/>
-                            <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<AmplifySignOut/></MenuItem>
+                            <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<div className={classes.navText} onClick={props.signOut}>Sign Out</div></MenuItem>
+                            
+                            {/* <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<AmplifySignOut/></MenuItem> */}
                         </Menu>
                     </div>
                     <div style={{paddingBlockStart:"20px"}}>
