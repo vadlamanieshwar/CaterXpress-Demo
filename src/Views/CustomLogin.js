@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Auth, Hub } from "aws-amplify";
+import Amplify, { Auth, Hub } from "aws-amplify";
+import { AmplifyAuthenticator, AmplifySignIn,AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { Container } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Provider } from "react-redux";
@@ -34,7 +36,7 @@ import fb from '../Assets/img/fb.png';
 import backg1 from '../Assets/img/backg1.png';
 
 const initialFormState = {
-    username: '', password: '', email: '',authCode: '',formType: 'home'   
+    username: '', password: '', email: '',authCode: '',formType: 'signUp'   
 }
 const useStyles = makeStyles((theme) => ({
     signInCard: {
@@ -100,13 +102,27 @@ function CustomLogin() {
     useEffect(() => {
         checkUser()
         setAuthListener()
+        console.log("use effect")
+        onAuthUIStateChange((nextAuthState, authData) => {
+            // setAuthState(nextAuthState);
+            // setUser(authData)
+            console.log("use effect change",nextAuthState, authData)
+
+        });
+        // Amplify.configure({
+        //     Auth: {
+        //         oauth: {
+        //             redirectSignIn: 'http://localhost:3000/',
+        //             redirectSignOut: 'http://localhost:3000/',
+        //         }}
+        // })
     }, [])
     async function setAuthListener() {
         Hub.listen('auth', (data) => {
             switch (data.payload.event){
                 case 'signOut':
-                    // console.log("user signed out");
-                    updateFormState(() => ({ ...formState, formType: "home"}))
+                    console.log("user signed out");
+                    updateFormState(() => ({ ...formState, formType: "signUp"}))
                     break;
                 default:
                     break;
@@ -118,7 +134,7 @@ function CustomLogin() {
             const user = await Auth.currentAuthenticatedUser();
             updateUser(user);
             updateFormState(() => ({ ...formState, formType: "signedIn"}))
-            // console.log("user: ",user);
+            console.log("user: ",user);
         } catch (err){
 
         }
@@ -147,7 +163,7 @@ function CustomLogin() {
         let e=false;
 
         const { username, authCode } = formState;
-        // console.log(username,authCode);
+        console.log(username,authCode);
         try{
             setHelperTextC("");
             await Auth.confirmSignUp({ username, authCode});
@@ -163,17 +179,23 @@ function CustomLogin() {
     async function signIn() {
         let e=false;
         const { username, password } = formState;
-        try{
-            setHelperTextSI("");
-            await Auth.signIn({ username, password });
-        }catch(err){
-            console.log("Sign In error:",err)
-            setHelperTextSI(err.message);
-            e=true;
-        }
-        if(!e){
-            updateFormState(() => ({ ...formState, formType: "signedIn"}))
-        }
+        Auth.signIn(username, password)
+        // If we are successful, navigate to Home screen
+        .then(user => console.log(user,"signed in"))
+        // On failure, display error in console
+        .catch(err => console.log(err));
+        // try{
+        //     setHelperTextSI("");
+        //     await Auth.signIn({ username, password });
+        //     console.log("sign in clicked")
+        // }catch(err){
+        //     console.log("Sign In error:",err)
+        //     setHelperTextSI(err.message);
+        //     e=true;
+        // }
+        // if(!e){
+        //     updateFormState(() => ({ ...formState, formType: "signedIn"}))
+        // }
 
     }
     return(
@@ -307,7 +329,34 @@ function CustomLogin() {
                             />
 
                         <div className={classes.wrap}>
-                        <Card className={classes.signInCard}>
+                        <AmplifyAuthenticator>
+                        <AmplifySignUp
+                                headerText="Sign Up"
+                                slot="sign-up"
+                                // usernameAlias="email"
+                                formFields={[
+                                {
+                                    type: "email",
+                                    label: "Custom email Label",
+                                    placeholder: "custom email placeholder",
+                                    required: true,
+                                },
+                                {
+                                    type: "password",
+                                    label: "Custom Password Label",
+                                    placeholder: "custom password placeholder",
+                                    required: true,
+                                },
+                                {
+                                    type: "username",
+                                    label: "Custom Phone Label",
+                                    placeholder: "custom Phone placeholder",
+                                    required: true,
+                                },
+                                ]} 
+                            />
+                        </AmplifyAuthenticator>
+                        {/* <Card className={classes.signInCard}>
                         
                         <CardContent className={classes.content}>
                             <h2>Sign Up</h2>
@@ -336,7 +385,7 @@ function CustomLogin() {
                             </p>
                             </form>
                         </CardContent>
-                    </Card>
+                    </Card> */}
                     {/* <input name="username" onChange={onChange} placeholder="username" />
                     <input name="password" type="password" onChange={onChange} placeholder="password"/>
                     <input name="email" onChange={onChange} placeholder="email"/>
@@ -394,9 +443,15 @@ function CustomLogin() {
                                 ...formState, formType: "home"
                             }))}
                             />
-                                                    <div className={classes.wrap}>
+                        <div className={classes.wrap}>
 
-                        <Card className={classes.signInCard}>
+                        <AmplifyAuthenticator>
+                        <AmplifySignIn
+                            headerText="My Custom Sign In Text"
+                            slot="sign-in"
+                        ></AmplifySignIn>
+                        </AmplifyAuthenticator>
+                        {/* <Card className={classes.signInCard}>
                         
                             <CardContent className={classes.content}>
                                 <h2>Sign In</h2>
@@ -423,7 +478,7 @@ function CustomLogin() {
                                 </p>
                                 </form>
                             </CardContent>
-                        </Card>
+                        </Card> */}
                         </div>
                     </div>
                 )

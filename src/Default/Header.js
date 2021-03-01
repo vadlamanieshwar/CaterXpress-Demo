@@ -42,23 +42,27 @@ export default function Header( props ) {
         <Toolbar>
           <img style={{width:"28px"}} className={classes.menuButton} src={headerMenu} alt="caterXpress"/>
 
-          <img style={{width:"200px"}} src={cxLogo} alt="caterXpress" onClick={props.home}/>
+          <img style={{width:"200px"}} src={cxLogo} alt="caterXpress" 
+          onClick={props.home}
+          />
 
           <div className={classes.log}>
           <Chip
             style={{
-              color: "white",
-              // fontSize: "small",
-              background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box"
+              fontSize: "large",
             }}
-           label="sign in"
-           onClick={props.signIn}></Chip>
+           label="Sign in"
+           onClick={props.signIn}
+           ></Chip>
           <Chip
-            label="sign up"
+            label="Sign up"
             style={{
-              // fontSize: "large",
+              fontSize: "large",
+              background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box",
+              color: "white",
             }}
-            onClick={props.signUp}></Chip>
+            onClick={props.signUp}
+            ></Chip>
           </div>
         </Toolbar>
       </AppBar>

@@ -14,18 +14,33 @@ import MyOrders from './Views/MyOrders';
 import Ratings from './Views/Ratings';
 import './App.css';
 import CustomLogin from './Views/CustomLogin';
-import { Hub } from 'aws-amplify';
+import Login from './Views/Login';
+
+import Amplify,{ Hub } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 function App() {
   const [currentUser, setCurrentUser] = useState()
   
-  // useEffect(() => {
+  useEffect(() => {
   //   Hub.listen('auth',(event) => {
   //     console.log("auth event",event)
   //     setCurrentUser(event.payload.event);
   //   })
-  // }, [])
-  return ( <CustomLogin/>
+  // Amplify.configure({
+  //           Auth: {
+  //               oauth: {
+  //                   redirectSignIn: 'http://localhost:3000/',
+  //                   redirectSignOut: 'http://localhost:3000/',
+  //               }}
+  //       })
+  }, [])
+  return ( 
+          <div>
+            <Login/>
+            <Footer/>
+          </div>
        // redux provider
     //    <Provider store={ store }>
 
