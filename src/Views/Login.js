@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFormState = {
-    username: '', password: '', email: '',authCode: '',formType: 'home'   
+    username: '', password: '', email: '',authCode: '',formType: 'signIn'   
 }
 
 function  Login(){
@@ -101,10 +101,11 @@ function  Login(){
     const [user, setUser] = React.useState();
 
     React.useEffect(() => {
+        console.log(authState,user);
         return onAuthUIStateChange((nextAuthState, authData) => {
             setAuthState(nextAuthState);
             setUser(authData)
-            console.log(nextAuthState)
+            console.log(nextAuthState,authData)
         });
     }, []);
 

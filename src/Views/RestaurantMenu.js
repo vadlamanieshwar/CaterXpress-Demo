@@ -187,16 +187,16 @@ const RestaurantMenu = ({match}) => {
                     {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
                         let url=cm.url;
                         if(cm.pname === "McRib Meal"){
-                            url=m5;
+                            url=mcrib;
                         }
                         else if(cm.pname === "40 McNuggets"){
-                            url=m6;
+                            url=nug;
                         }
                         else if(cm.pname === "Medium French Fries"){
-                            url=m7;
+                            url=fries;
                         }
                         else if(cm.pname === "Cake"){
-                            url=m8;
+                            url=cake;
                         }
                         // else if(cm.pname === "Horchata"){
                         //     url=m1;
@@ -211,8 +211,9 @@ const RestaurantMenu = ({match}) => {
                         //     url=m4;
                         // }
                         return <Card className={classes.root}  onClick={()=>{
-                            if(cm.pname === "McRib Meal"){
+                            if(cm.pname === "McRib Meal"  || cm.pname === "Horchata"){
                                 handleOpen();
+                                console.log(cm,menu.restMenu[res][0]["name"])
                                 setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
                             }
                         }}>

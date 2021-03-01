@@ -272,9 +272,9 @@ const MainMenu = ( props ) => {
                         <div className="cat-buttons">
                             {/* <Link to="/viewall"> */}
                                 <Button className={classes.viweAllChip} variant="outlined"
-                                    onClick={()=>{
-                                        props.setFilter({filter:"rate",sel:!props.sel})
-                                    }}
+                                    // onClick={()=>{
+                                    //     props.setFilter({filter:"rate",sel:!props.sel})
+                                    // }}
                                 >View All</Button>
                             {/* </Link> */}
                             <ArrowBackIcon className={classes.optChange}/>
