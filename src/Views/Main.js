@@ -303,7 +303,7 @@ const FilteredMenu = ( props ) => {
     const filMenu = FilterMenu.data
     const classes = useStyles();
     const filter = useSelector(getFilter) || {};
-    console.log(filter)
+    // console.log(filter)
 
     return(
         // add loading till you get filMenu from store
@@ -329,7 +329,7 @@ const FilteredMenu = ( props ) => {
                                                     alt={fil.name}
                                                     onClick={
                                                         ()=>{
-                                                            console.log(fil.name)
+                                                            // console.log(fil.name)
                                                             fetchMenu(fil.name).then(res => {
                                                                 dispatch(restMenuSlice.actions.addMenu(res));
                                                             })                                       

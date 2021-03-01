@@ -5,14 +5,16 @@ export default function Footer() {
     return(
 
         <div id="footer">
-            <div  className="row">
-                <div className="col-sm-6 center-block">
+            <div style={{display:"flex"}}>
+                {/* <div className="col-sm-6 center-block"> */}
+                <div style={{width:"50%"}}>
                     <div className="footer-left">
                         <span className="footer-logo">CX</span>
                         <p className="footer-name">Cater Xpress</p>
                     </div>
                 </div>
-                <div className="col-sm-3">
+                {/* <div className="col-sm-3"> */}
+                <div style={{width:"25%"}}>
                     <ul className="footer-ul">
                         <li>About Cater Xpress</li>
                         <li>Read our blog</li>
@@ -21,7 +23,8 @@ export default function Footer() {
                         <li>Sign up for delivery</li>
                     </ul>
                 </div>
-                <div className="col-sm-3">
+                {/* <div className="col-sm-3"> */}
+                <div style={{width:"25%"}}>
                     <ul className="footer-ul">
                         <li>View all restaurants</li>
                         <li>View all cities</li>

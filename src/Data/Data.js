@@ -17,6 +17,58 @@ import bur1 from '../Assets/img/bur1.png';
 import exMex2 from '../Assets/img/exMex2.png';
 import exCafe2 from '../Assets/img/exCafe2.png';
 
+export const MainMenu =
+{
+    data: [
+        {
+            category: "New on Cater Xpress",
+            options: [
+                {
+                    img: nm1,
+                    restaurant: "Express Chinese",
+                    rate: "3.99",
+                    time: 30
+                },
+                {
+                    img: nm2,
+                    restaurant: "Express Cafe",
+                    rate: "2.99",
+                    time: 20
+                },
+                {
+                    img: nm3,
+                    restaurant: "Any company Mongolian",
+                    rate: "4.99",
+                    time: 45
+                }
+            ]
+        },
+        {
+            category: "National Favorites",
+            options: [
+                {
+                    img: nf1,
+                    restaurant: "Example Burger",
+                    rate: "3.99",
+                    time: 30
+                },
+                {
+                    img: nf2,
+                    restaurant: "EgRestaurant Spanish",
+                    rate: "2.99",
+                    time: 20
+                },
+                {
+                    img: nf3,
+                    restaurant: "EgRestaurant Indian",
+                    rate: "4.99",
+                    time: 45
+                }
+            ]
+        }
+    ]
+}
+
 export const Menu =
 { 
     data: [

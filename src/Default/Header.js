@@ -15,7 +15,7 @@ import headerMenu  from '../Assets/img/headerMenu.svg';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box",
+    background: "transparent linear-gradient(180deg, #DB750A 0%, #dc730a 100%) 0% 0% no-repeat padding-box",
     padding: 10
 
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(95),
     justifyContent: "space-between",
     display: "flex",
-    width: 150
+    width: 200
   }
 }));
 
@@ -40,17 +40,25 @@ export default function Header( props ) {
     <div>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
-          <img className={classes.menuButton} src={headerMenu} alt="caterXpress"/>
+          <img style={{width:"28px"}} className={classes.menuButton} src={headerMenu} alt="caterXpress"/>
 
-          <img src={cxLogo} alt="caterXpress"/>
+          <img style={{width:"200px"}} src={cxLogo} alt="caterXpress" onClick={props.home}/>
 
           <div className={classes.log}>
-          <Chip label="sign in"></Chip>
-          <Chip style={{
-            color: "white",
-            background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box"
-          }} label="sign up"
-          onClick={props.signUp}></Chip>
+          <Chip
+            style={{
+              color: "white",
+              // fontSize: "small",
+              background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box"
+            }}
+           label="sign in"
+           onClick={props.signIn}></Chip>
+          <Chip
+            label="sign up"
+            style={{
+              // fontSize: "large",
+            }}
+            onClick={props.signUp}></Chip>
           </div>
         </Toolbar>
       </AppBar>
