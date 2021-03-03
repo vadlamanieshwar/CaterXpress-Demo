@@ -1,6 +1,7 @@
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import HeaderNext from '../Default/HeaderNext';
 
 const useStyles = makeStyles({
     root:{
@@ -14,7 +15,9 @@ const MyOrders = () => {
     const classes = useStyles();
 
     return(
-        <div className={classes.root}>
+        <div>
+            <HeaderNext/>
+            <div  className={classes.root}>
             <div className="orders-title">Orders</div>
             <div className="orders-subtitle">Previous Orders</div>
             <Card className={classes.card}>
@@ -64,6 +67,7 @@ const MyOrders = () => {
                 </div>
                 <hr/>
             </Card>
+            </div>
         </div>
     );
 }

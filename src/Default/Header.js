@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { Chip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom';
 
 // import { ReactComponent as CxLogo } from '../Assets/img/cx-logo.svg';
 import cxLogo from '../Assets/img/cx-logo.svg'
@@ -42,18 +43,26 @@ export default function Header( props ) {
         <Toolbar>
           <img style={{width:"28px"}} className={classes.menuButton} src={headerMenu} alt="caterXpress"/>
 
-          <img style={{width:"200px"}} src={cxLogo} alt="caterXpress" 
-          onClick={props.home}
-          />
+          <Link to="/">
+            <img style={{width:"200px"}} src={cxLogo} alt="caterXpress" 
+            // onClick={props.home}
+            />
+          </Link>
 
           <div className={classes.log}>
-          <Chip
-            style={{
-              fontSize: "large",
-            }}
-           label="Sign in"
-           onClick={props.signIn}
-           ></Chip>
+          <Link to="/signin">
+
+            <Chip
+              style={{
+                fontSize: "large",
+              }}
+            label="Sign in"
+            //  onClick={props.signIn}
+            ></Chip>
+
+           </Link>
+           <Link to="/signin">
+
           <Chip
             label="Sign up"
             style={{
@@ -61,8 +70,10 @@ export default function Header( props ) {
               background: "transparent linear-gradient(180deg, #DB750A 0%, #DB4300 100%) 0% 0% no-repeat padding-box",
               color: "white",
             }}
-            onClick={props.signUp}
+            // onClick={props.signUp}
             ></Chip>
+            </Link>
+
           </div>
         </Toolbar>
       </AppBar>

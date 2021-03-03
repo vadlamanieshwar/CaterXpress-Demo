@@ -17,7 +17,7 @@ import bur1 from '../Assets/img/bur1.png';
 import exMex2 from '../Assets/img/exMex2.png';
 import exCafe2 from '../Assets/img/exCafe2.png';
 
-export const MainMenu =
+export const Mainmenu =
 {
     data: [
         {

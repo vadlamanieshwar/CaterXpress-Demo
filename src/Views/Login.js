@@ -24,7 +24,7 @@ import Payment from "./Payment";
 import store from "../store";
 import MyOrders from './MyOrders';
 import Ratings from './Ratings';
-import { MainMenu } from '../Data/Data';
+import { Mainmenu } from '../Data/Data';
 import Ellipse2 from '../Assets/img/Ellipse2.png';
 import Ellipse3 from '../Assets/img/Ellipse3.png';
 import Ellipse4 from '../Assets/img/Ellipse4.png';
@@ -34,6 +34,7 @@ import google from '../Assets/img/google.png';
 import twitter from '../Assets/img/twitter.png';
 import fb from '../Assets/img/fb.png';
 import backg1 from '../Assets/img/backg1.png';
+import { Filter, FilteredMenu, fetchMenu, fetchFilter } from './Main';
 
 const useStyles = makeStyles((theme) => ({
     signInCard: {
@@ -92,8 +93,13 @@ const initialFormState = {
 }
 
 function  Login(){
+    const [filter,setFilter] = useState({
+        filter:"",
+        sel:false
+    });
+   
     const classes = useStyles();
-    const menu = MainMenu.data;
+    const menu = Mainmenu.data;
     const [formState, updateFormState] = useState(initialFormState);
     const { formType } = formState;
 
@@ -111,7 +117,6 @@ function  Login(){
 
     return authState === AuthState.SignedIn && user ? (
         <div>
-            <Provider store={ store }>
                 <div className="App">
                     <Router>
                         <Container>
@@ -128,7 +133,6 @@ function  Login(){
                         </Container>
                     </Router>
                 </div>
-            </Provider>
 
         </div>
       ) : (
@@ -147,7 +151,7 @@ function  Login(){
                 {
                     formType === "home" ?
                     <div>
-                                                <div style={{padding:"5% 0 5% 0",height:"800px",color: "white",background: `transparent url(${backg1}) 100% no-repeat padding-box`}}>
+                        <div style={{padding:"5% 0 5% 0",height:"800px",color: "white",background: `transparent url(${backg1}) 100% no-repeat padding-box`}}>
                             <div  className="App">
                                 <div style={{fontSize: "48px",fontWeight:"600",paddingBlockStart:"80px"}}>Your favourite foods, <br/>delivered</div>
                                 <Paper style={{height:"fit-content",margin:"15px",width: "300px",borderRadius: "23px"}}>
@@ -170,6 +174,7 @@ function  Login(){
                         <div className="App">
                         
                             <div className="food-filter">
+                                {/* <Filter setFilter={setFilter} sel={filter.sel} filter={filter.filter}/> */}
                                 <Button 
                                     className={classes.chip} 
                                     variant="outlined"
@@ -184,6 +189,7 @@ function  Login(){
                             </div>
             
                         </div>
+                        
                         <div className="App">
                             <div className="cat-cont">
                                 <div className="cat-title-cont">  

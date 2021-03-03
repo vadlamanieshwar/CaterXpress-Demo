@@ -20,6 +20,8 @@ import offers from '../Assets/img/offers.png';
 import myorders from '../Assets/img/myorders.png';
 import signout from '../Assets/img/signout.png';
 import { Auth } from 'aws-amplify';
+import userSlice, { getUser } from "../store/slices/user";
+import userDetailSlice, { getUserDetail } from "../store/slices/userDetail";
 
 const useStyles = makeStyles({
     list: {
@@ -140,7 +142,7 @@ export default function HeaderNext( props ) {
       
     }
     return (
-              <div className="nav">
+              <div className="nav App">
 
                   <div className="nav-left">
                     <div style={{padding:"20px"}}>
@@ -152,11 +154,18 @@ export default function HeaderNext( props ) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem className={classes.navItem} onClick={handleClose}><img src={home} alt="home"/>&nbsp;&nbsp;<div className={classes.navText}>Home</div></MenuItem><hr/>
+                            <Link to="/main"><MenuItem className={classes.navItem} onClick={handleClose}><img src={home} alt="home"/>&nbsp;&nbsp;<div className={classes.navText}>Home</div></MenuItem><hr/></Link>
                             <MenuItem className={classes.navItem} onClick={handleClose}><img src={pickup} alt="pick up"/>&nbsp;&nbsp;<div className={classes.navText}>Pick up</div></MenuItem><hr/>
                             <MenuItem className={classes.navItem} onClick={handleClose}><img src={offers} alt="offers"/>&nbsp;&nbsp;<div className={classes.navText}>Offers</div></MenuItem><hr/>
                             <Link to="/myorders"><MenuItem className={classes.navItem} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;<div className={classes.navText}>My Orders</div></MenuItem></Link><hr/>
-                            <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<div className={classes.navText} onClick={props.signOut}>Sign Out</div></MenuItem>
+                            <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<div className={classes.navText} onClick={()=> {
+                               
+                                Auth.signOut();
+                                dispatch(userSlice.actions.removeUser());
+                                dispatch(userDetailSlice.actions.removeUserDetail());
+                                console.log("User signed out");
+
+                            }}>Sign Out</div></MenuItem>
                             
                             {/* <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<AmplifySignOut/></MenuItem> */}
                         </Menu>

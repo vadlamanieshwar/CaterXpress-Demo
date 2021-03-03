@@ -29,6 +29,8 @@ import m5 from '../Assets/img/m5.png';
 import m6 from '../Assets/img/m6.png';
 import m7 from '../Assets/img/m7.png';
 import m8 from '../Assets/img/m8.png';
+import Header from "../Default/Header";
+import HeaderNext from "../Default/HeaderNext";
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
     opt:{
         marginBlockEnd: 20,
+        padding: "0px 5% 0px 5%",
         '& span':{
             padding: "10px"
         }
@@ -153,19 +156,23 @@ const RestaurantMenu = ({match}) => {
 }, [])
     
     return(<div>
-        <div>{Object.keys(menu).length > 0?
+        <HeaderNext/>
+        <div>
+            {Object.keys(menu).length > 0?
         
             <div className="menu-page-cont">
                 <div className={classes.menuBack}>
-                    <div className={classes.title}>{menu.restMenu[res][0].name}</div>
-                    <div className={classes.deliverinfo}>
-                        $ {menu.restMenu[res][0].deliverinfo[0].deliverinfo} Delivery fee.  
-                        Delivered in {menu.restMenu[res][0].deliverinfo[0].delivertime} mins . 
-                        &nbsp;{menu.restMenu[res][0].deliverinfo[0].rating} . 
-                        ({menu.restMenu[res][0].deliverinfo[0].reviewno}+ ratings)
+                    <div className="App">
+                        <div className={classes.title}>{menu.restMenu[res][0].name}</div>
+                        <div className={classes.deliverinfo}>
+                            $ {menu.restMenu[res][0].deliverinfo[0].deliverinfo} Delivery fee.  
+                            Delivered in {menu.restMenu[res][0].deliverinfo[0].delivertime} mins . 
+                            &nbsp;{menu.restMenu[res][0].deliverinfo[0].rating} . 
+                            ({menu.restMenu[res][0].deliverinfo[0].reviewno}+ ratings)
+                        </div>
                     </div>
                 </div>
-                <div>
+                <div className="App">
                     <div className={classes.det}>$ . American . Fast Food . Burger</div>
                     <div className={classes.address}>{menu.restMenu[res][0].address}</div>
                     <div className={classes.dd}>
@@ -181,7 +188,7 @@ const RestaurantMenu = ({match}) => {
                     <span>Fries, sides and more&nbsp;</span>
                     <span><ArrowForwardRoundedIcon/></span>
                 </div>
-                <div>
+                <div className="App">
                     <h3>Signature Dish</h3>
                     <div className={classes.mostPopular}>
                     {menu.restMenu[res][0]["Signature Dish"].map( (cm,idx) => {
@@ -213,7 +220,7 @@ const RestaurantMenu = ({match}) => {
                         return <Card className={classes.root}  onClick={()=>{
                             if(cm.pname === "McRib Meal"  || cm.pname === "Horchata"){
                                 handleOpen();
-                                console.log(cm,menu.restMenu[res][0]["name"])
+                                // console.log(cm,menu.restMenu[res][0]["name"])
                                 setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
                             }
                         }}>
@@ -241,7 +248,7 @@ const RestaurantMenu = ({match}) => {
                 
                     </div>
                 </div>
-                <div>
+                <div className="App">
                     <h3>Combo Meals</h3>
                     <div className={classes.comboMeals}>
 

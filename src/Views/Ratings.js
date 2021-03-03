@@ -13,6 +13,7 @@ import { useSelector,  useDispatch } from "react-redux";
 import exBur from '../Assets/img/exBur.png';
 import { ReactComponent as RemoveIcon } from '../Assets/img/remove-button.svg';
 import reviewsSlice, { getReviews } from "../store/slices/reviews";
+import HeaderNext from "../Default/HeaderNext";
 
 const useStyles = makeStyles({
     root:{
@@ -92,6 +93,8 @@ const Ratings = () => {
     }, [])
 
     return(
+        <div>
+            <HeaderNext />
         <div  className={classes.root}>
             <h2>Rate your food</h2>
             <div className={classes.commentCont}>
@@ -132,7 +135,7 @@ const Ratings = () => {
                                 />          
                             
                             </Paper> 
-                            <Link to="/">
+                            <Link to="/main">
                             <button
                                 className="submit-button"
                                 onClick={()=>{
@@ -180,7 +183,8 @@ const Ratings = () => {
                 }
                 
             </div>
-            <Link to="/"><div className={classes.back}>Back to home</div></Link>
+            <Link to="/main"><div className={classes.back}>Back to home</div></Link>
+        </div>
         </div>
     );
 }

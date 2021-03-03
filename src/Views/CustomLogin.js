@@ -24,7 +24,7 @@ import Payment from "./Payment";
 import store from "../store";
 import MyOrders from './MyOrders';
 import Ratings from './Ratings';
-import { MainMenu } from '../Data/Data';
+import { Mainmenu } from '../Data/Data';
 import Ellipse2 from '../Assets/img/Ellipse2.png';
 import Ellipse3 from '../Assets/img/Ellipse3.png';
 import Ellipse4 from '../Assets/img/Ellipse4.png';
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CustomLogin() {
     const classes = useStyles();
-    const menu = MainMenu.data;
+    const menu = Mainmenu.data;
     const [formState, updateFormState] = useState(initialFormState);
     const [helperText,setHelperText] = useState("");
     const [helperTextC,setHelperTextC] = useState("")

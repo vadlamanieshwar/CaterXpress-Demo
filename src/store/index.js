@@ -4,7 +4,9 @@ import itemSlice from "./slices/items";
 import restMenuSlice from "./slices/restMenu";
 import filterSlice from "./slices/filter";
 import reviewsSlice from "./slices/reviews";
+import selectedSlice from "./slices/selected";
 import userDetailSlice from "./slices/userDetail";
+import userSlice from "./slices/user";
 
 const store = configureStore({
 
@@ -15,7 +17,9 @@ const store = configureStore({
         items      : itemSlice.reducer,
         filter      : filterSlice.reducer,
         userDetail      : userDetailSlice.reducer,
-        reviews      : reviewsSlice.reducer
+        reviews      : reviewsSlice.reducer,
+        selected      : selectedSlice.reducer,
+        user          : userSlice.reducer,
 
     }
   

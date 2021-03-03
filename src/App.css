@@ -221,7 +221,9 @@ opacity: 1;
   font-size: 30px;
   font-weight: 500;
 }
-
+.pay-button:disabled{
+  background: #ACACAC;
+}
 .payment-done{
   text-align: center;
 }
