@@ -2,7 +2,6 @@
 import itemSlice, { getItems } from "../store/slices/items";
 import cartSlice from "../store/slices/cart";
 import payDone from "../Assets/img/payDone.svg";
-import Header from "../Default/Header";
 
 // imports from downloads
 import { useSelector,  useDispatch } from "react-redux";
@@ -13,13 +12,10 @@ import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import HeaderNext from "../Default/HeaderNext";
-import userSlice, { getUser } from "../store/slices/user";
-import userDetailSlice, { getUserDetail } from "../store/slices/userDetail";
+import { getUser } from "../store/slices/user";
+import { getUserDetail } from "../store/slices/userDetail";
 import { getCart } from "../store/slices/cart";
 
-import { useHistory } from "react-router-dom";
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
-import { Auth } from "aws-amplify";
 
 const useStyles = makeStyles({
     root: {

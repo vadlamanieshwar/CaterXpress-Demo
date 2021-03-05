@@ -145,6 +145,9 @@ const RestaurantMenu = ({match}) => {
     
          axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=" + q)
         .then(res => resolve(res.data))
+        .catch((err)=>{
+            console.log("error:",err)
+        })
         })
     
     };

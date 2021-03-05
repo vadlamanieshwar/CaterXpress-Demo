@@ -8,12 +8,14 @@ import { Card, InputBase, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useSelector,  useDispatch } from "react-redux";
-
+import moment from 'moment';
 // local imports
 import exBur from '../Assets/img/exBur.png';
 import { ReactComponent as RemoveIcon } from '../Assets/img/remove-button.svg';
 import reviewsSlice, { getReviews } from "../store/slices/reviews";
 import HeaderNext from "../Default/HeaderNext";
+import userDetailSlice, { getUserDetail } from "../store/slices/userDetail";
+import userSlice, { getUser } from "../store/slices/user";
 
 const useStyles = makeStyles({
     root:{
@@ -81,6 +83,8 @@ const Ratings = () => {
         }
     ];
     const dispatch = useDispatch();
+    const user = useSelector(getUserDetail) || "";
+    const isUser = useSelector(getUser) || false;
 
     useEffect(() => {
 
@@ -88,9 +92,18 @@ const Ratings = () => {
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
     })
-    
-
+    .catch((err)=>{
+        console.log("error:",err)
+    })
+    // console.log();
     }, [])
+
+    const reviewPost = (r) => {
+        axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating', r)
+          .then(function (response) {
+            console.log(response);
+          })
+    }
 
     return(
         <div>
@@ -128,7 +141,7 @@ const Ratings = () => {
                                     // className={classes.input}
                                     placeholder="    Your Comments..."
                                     onChange={(event, newValue) => {
-                                        setComment(newValue);
+                                        setComment(event.target.value);
                                     }}
                                     value={comment}
                                     // inputProps={{ 'aria-label': 'search' }}
@@ -139,7 +152,16 @@ const Ratings = () => {
                             <button
                                 className="submit-button"
                                 onClick={()=>{
-                                    console.log("if needed details can be added to DB Example Burger",value,comment)
+                                    reviewPost("username="+user.username+"&restaurant=Example Burger&rating="+value+"&review="+comment+"&created_at="+moment().format("YYYY-MM-DD HH:mm:ss.SSSSSS"));
+                                    // console.log(
+                                    //     {
+                                    //         "restaurant": "Example Burger",
+                                    //         "username":user.username,
+                                    //         "rating":value,
+                                    //         "review":comment,
+                                    //         "created_at":moment().format("YYYY-MM-DD HH:mm:ss.SSSSSS")
+                                    //     }
+                                    //     )
                                 }}
                                 disabled={value===0?true:false}
                             >Submit</button>    
@@ -150,7 +172,7 @@ const Ratings = () => {
                         <Link to="/myorders"><RemoveIcon /></Link>
                     </div>
                 </Card>
-                {Object.keys(review).length>0?
+                {/* {Object.keys(review).length>0?
                     <div className={classes.comment}>
                         <h2>Ratings from others</h2><br/>
                         <h2 style={{color:"#E87803"}}>Example Burger</h2>
@@ -180,7 +202,7 @@ const Ratings = () => {
                 </div>
                 :
                 ""
-                }
+                } */}
                 
             </div>
             <Link to="/main"><div className={classes.back}>Back to home</div></Link>

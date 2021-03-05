@@ -198,3 +198,73 @@ export const FilterMenu = {
         }
     ]
 }
+
+export const viewAll = {
+    data: [{
+        "name": "Example Burger",
+        "createdAt": "2021-02-10 11:19:40",
+        "updatedAt": "2021-02-10 11:19:40",
+        "type1": "Fast Food",
+        "type2": "Burgers",
+        "avgprice": 8,
+        "address": "450 Talbot Street Princeton, NJ 08540",
+        "orderinfo": [{
+            "delivertime": 30,
+            "rating": 4.5,
+            "reviewno": 4572,
+            "deliveryfee": 1.99
+        }],
+        "foodImages": [{
+            "url": "https://master.d30yb4or234i1a.amplifyapp.com/static/media/nf1.53d5287f.png",
+            "caption": "nf1"
+        }, {
+            "url": "https://master.d30yb4or234i1a.amplifyapp.com/static/media/exBur.d5eedaed.png",
+            "caption": "exBur"
+        }]
+    }, {
+        "name": "Example Mexican",
+        "createdAt": "2021-02-10 11:19:40",
+        "updatedAt": "2021-02-10 11:19:40",
+        "type1": "Fast Food",
+        "type2": "Chicken",
+        "avgprice": 20,
+        "address": {
+            "street": "8773 E. New Saddle Lane Westford",
+            "location": "Westford, MA",
+            "zipcode": "01886"
+        },
+        "orderinfo": [{
+            "delivertime": 40,
+            "rating": 4.8,
+            "reviewno": 9772,
+            "deliveryfee": 2.5
+        }],
+        "foodImages": [{
+            "url": "https://master.d30yb4or234i1a.amplifyapp.com/static/media/nf2.8b3a02cb.png",
+            "caption": "nf2"
+        }, {
+            "url": "https://master.d30yb4or234i1a.amplifyapp.com/static/media/exMex.9d072dd6.png",
+            "caption": "exMex"
+        }]
+    }, {
+        "name": "Example Cafe",
+        "createdAt": "2021-02-22 11:19:40",
+        "updatedAt": "2021-02-22 11:19:40",
+        "type1": "Fast Food",
+        "type2": "Coffee",
+        "avgprice": 10,
+        "address": "23 La Sierra Drive Little Falls, NJ 07424",
+        "orderinfo": [{
+            "delivertime": 15,
+            "rating": 4.6,
+            "reviewno": 1256,
+            "deliveryfee": 3.99
+        }],
+        "foodImages": [{
+            "url": "https://master.d30yb4or234i1a.amplifyapp.com/static/media/exCafe2.2819e3b4.png",
+            "caption": "exCafe2"
+        }, {
+            "url": "https://master.d30yb4or234i1a.amplifyapp.com/static/media/exCafe.0097b0d0.png",
+            "caption": "exCafe"
+        }]
+    }]}
