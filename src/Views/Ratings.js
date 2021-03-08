@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useSelector,  useDispatch } from "react-redux";
 import moment from 'moment';
+import { useHistory } from "react-router-dom";
+
 // local imports
 import exBur from '../Assets/img/exBur.png';
 import { ReactComponent as RemoveIcon } from '../Assets/img/remove-button.svg';
@@ -85,6 +87,7 @@ const Ratings = () => {
     const dispatch = useDispatch();
     const user = useSelector(getUserDetail) || "";
     const isUser = useSelector(getUser) || false;
+    const history = useHistory();
 
     useEffect(() => {
 
@@ -102,6 +105,7 @@ const Ratings = () => {
         axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating', r)
           .then(function (response) {
             console.log(response);
+            history.push("/main");
           })
     }
 
@@ -148,7 +152,7 @@ const Ratings = () => {
                                 />          
                             
                             </Paper> 
-                            <Link to="/main">
+                            {/* <Link to="/main"> */}
                             <button
                                 className="submit-button"
                                 onClick={()=>{
@@ -165,14 +169,14 @@ const Ratings = () => {
                                 }}
                                 disabled={value===0?true:false}
                             >Submit</button>    
-                            </Link>         
+                            {/* </Link>          */}
                         </div>
                     </div>
                     <div className="remove-sec">
                         <Link to="/myorders"><RemoveIcon /></Link>
                     </div>
                 </Card>
-                {/* {Object.keys(review).length>0?
+                {Object.keys(review).length>0?
                     <div className={classes.comment}>
                         <h2>Ratings from others</h2><br/>
                         <h2 style={{color:"#E87803"}}>Example Burger</h2>
@@ -202,7 +206,7 @@ const Ratings = () => {
                 </div>
                 :
                 ""
-                } */}
+                }
                 
             </div>
             <Link to="/main"><div className={classes.back}>Back to home</div></Link>
