@@ -22,7 +22,58 @@ import signout from '../Assets/img/signout.png';
 import { Auth } from 'aws-amplify';
 import userSlice, { getUser } from "../store/slices/user";
 import userDetailSlice, { getUserDetail } from "../store/slices/userDetail";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { useHistory } from "react-router-dom";
 
+export function ComboBox() {
+    const classes = useStyles();
+    const history = useHistory();
+
+  return (
+    <Autocomplete
+      id="combo-box-demo"
+      className={classes.comboBox}
+      options={restaurant}
+      getOptionLabel={(option) => option.name}
+      onChange={(event, newValue) => {
+            if(newValue !== null){
+                if(newValue.name === "Example Burger"){
+                    history.push("/restaurant/Example Burger");
+                }
+            }
+        }}
+      style={{ width: 300 }}
+      renderInput={(params) => 
+      <TextField {...params} placeholder="Search" 
+        InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+            <InputAdornment position="start">
+                <SearchIcon />
+            </InputAdornment>
+            ),
+        }}
+        variant="outlined"
+        />}
+    />
+  );
+}
+
+// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+const restaurant = [
+  { name: 'Example Burger'},
+  { name: 'Example Mexican'},
+  { name: 'Example Cafe'},
+  { name: 'Express Chinese'},
+  { name: 'AnyCompany Asian'},
+  { name: 'AnyCompany Mongolian'},
+  { name: "EgRestaurant African"},
+  { name: 'EgRestaurant Indian'},
+  { name: 'AnyCompany Steaks'},
+  { name: 'Express Burgers'},
+];
 const useStyles = makeStyles({
     list: {
       width: 250,
@@ -49,6 +100,10 @@ const useStyles = makeStyles({
     navText:{
         width: "100%",
         textAlign: "center"
+    },
+    comboBox:{
+        paddingBlockStart: 10,
+        paddingInlineEnd: 10
     }
   });
 
@@ -187,7 +242,8 @@ export default function HeaderNext( props ) {
                   </div>
 
                     <div className="nav-right">
-                        <Paper style={{height:"fit-content",margin:"15px"}}>
+                        <ComboBox/>
+                        {/* <Paper style={{height:"fit-content",margin:"15px"}}>
                             <IconButton type="submit" 
                             // className={classes.iconButton} 
                             aria-label="search">
@@ -199,7 +255,7 @@ export default function HeaderNext( props ) {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                             
-                        </Paper>
+                        </Paper> */}
                         <div>
                             <Chip
                                 icon={<AddShoppingCartIcon />}

@@ -134,6 +134,7 @@ const RestaurantMenu = ({match}) => {
         setOpen(false);
       };
       const fetchMenu = () => {
+          console.log("iam here!")
         let q = "";
         if(res === "Example Burger"){
             q = "Example%20Burger";
@@ -152,19 +153,23 @@ const RestaurantMenu = ({match}) => {
     
     };
     useEffect(() => {
+        dispatch(restMenuSlice.actions.removeMenu());
+
         fetchMenu().then(res => {
             dispatch(restMenuSlice.actions.addMenu(res));
             // console.log(res);
-        })                                       
-}, [])
+        })       
+        console.log(match.params.id)                                
+    }, [])
     
     return(<div>
         <HeaderNext/>
         <div>
-            {Object.keys(menu).length > 0?
+            {Object.keys(menu).length > 0 && Object.keys(menu.restMenu)[0]===res ?
         
             <div className="menu-page-cont">
                 <div className={classes.menuBack}>
+                    {/* {console.log()} */}
                     <div className="App">
                         <div className={classes.title}>{menu.restMenu[res][0].name}</div>
                         <div className={classes.deliverinfo}>
