@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
 const RestaurantMenu = ({match}) => {
     const dispatch = useDispatch();
     const res = match.params.id;
+    const [p,setP] = useState(match.params.id);
     const classes = useStyles();
     const menu = useSelector(getRestMenu) || {};
     // console.log(res,menu);
@@ -134,7 +135,7 @@ const RestaurantMenu = ({match}) => {
         setOpen(false);
       };
       const fetchMenu = () => {
-          console.log("iam here!")
+        //   console.log("iam here!")
         let q = "";
         if(res === "Example Burger"){
             q = "Example%20Burger";
@@ -157,9 +158,17 @@ const RestaurantMenu = ({match}) => {
 
         fetchMenu().then(res => {
             dispatch(restMenuSlice.actions.addMenu(res));
+            console.log(res);
+        })
+    }, [match.url]);
+    useEffect(() => {
+        dispatch(restMenuSlice.actions.removeMenu());
+
+        fetchMenu().then(res => {
+            dispatch(restMenuSlice.actions.addMenu(res));
             // console.log(res);
         })       
-        console.log(match.params.id)                                
+        // console.log(match.params.id,p)                                
     }, [])
     
     return(<div>

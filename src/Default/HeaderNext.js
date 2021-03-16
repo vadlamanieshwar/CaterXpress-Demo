@@ -42,6 +42,9 @@ export function ComboBox() {
                 if(newValue.name === "Example Burger"){
                     history.push("/restaurant/Example Burger");
                 }
+                if(newValue.name === "Example Mexican"){
+                    history.push("/restaurant/Example Mexican");
+                }
             }
         }}
       style={{ width: 300 }}
@@ -61,7 +64,6 @@ export function ComboBox() {
   );
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const restaurant = [
   { name: 'Example Burger'},
   { name: 'Example Mexican'},
