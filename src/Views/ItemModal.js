@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import Icon from '@material-ui/core/Icon';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -77,7 +78,7 @@ const ItemModal = ( props ) => {
                                     itemNo: 1,
                                     cost: clicked.price,
                                     rest: clicked.restaurant,
-                                    time: new Date().toString()
+                                    time: moment().format("YYYY-MM-DD HH:mm:ss.SSSSSS")
                                 }))
                                 props.handleClose();
                             }else{
@@ -87,7 +88,7 @@ const ItemModal = ( props ) => {
                                     itemNo: 1,
                                     cost: +clicked.price + 4.20,
                                     rest: clicked.restaurant,
-                                    time: new Date().toString()
+                                    time: moment().format("YYYY-MM-DD HH:mm:ss.SSSSSS")
                                 }))
                                 props.handleClose();
                             }

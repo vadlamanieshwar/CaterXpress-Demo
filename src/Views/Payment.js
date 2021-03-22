@@ -15,6 +15,7 @@ import HeaderNext from "../Default/HeaderNext";
 import { getUser } from "../store/slices/user";
 import { getUserDetail } from "../store/slices/userDetail";
 import { getCart } from "../store/slices/cart";
+import axios from 'axios';
 
 
 const useStyles = makeStyles({
@@ -49,6 +50,16 @@ const Payment = () => {
     const user = useSelector(getUserDetail) || "";
     const no = useSelector(getCart) || 0;
 
+    const orderPost = (r) => {
+        axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/order', r)
+          .then(function (response) {
+            console.log(response);
+            // history.push("/main");
+            dispatch(itemSlice.actions.removeItems());
+            dispatch(cartSlice.actions.removeAll());
+            setPay(true);
+          })
+    }
     return(
         <div>
             <HeaderNext/>
@@ -93,11 +104,10 @@ const Payment = () => {
                                     </div>
                                     <div style={{textAlign:"center"}}>
                                     <button className="pay-button" disabled={no === 0?true:false} onClick={()=>{
-                                        console.log(no)
-                                        console.log("Payment done for these Items: ",items,"by this user:",user);
-                                        dispatch(itemSlice.actions.removeItems());
-                                        dispatch(cartSlice.actions.removeAll());
-                                        setPay(true);
+                                        for(let i=0;i<no;i++){
+                                            orderPost( "restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"])
+                                            console.log("restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"])
+                                        }
                                     }}>Pay</button>
                                     </div>
                                 </div>
