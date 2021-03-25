@@ -50,8 +50,8 @@ const Payment = () => {
     const user = useSelector(getUserDetail) || "";
     const no = useSelector(getCart) || 0;
 
-    const orderPost = (r) => {
-        axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/order', r)
+    const orderPost = (order) => {
+        axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/order', JSON.stringify(order))
           .then(function (response) {
             console.log(response);
             // history.push("/main");
@@ -59,6 +59,9 @@ const Payment = () => {
             dispatch(cartSlice.actions.removeAll());
             setPay(true);
           })
+          .catch((err)=>{
+            console.log("error:",err.message)
+        })
     }
     return(
         <div>
@@ -104,10 +107,14 @@ const Payment = () => {
                                     </div>
                                     <div style={{textAlign:"center"}}>
                                     <button className="pay-button" disabled={no === 0?true:false} onClick={()=>{
+                                        let x=[];
                                         for(let i=0;i<no;i++){
-                                            orderPost( "restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"])
-                                            console.log("restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"])
+                                            x.push("restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"]);
+                                            // orderPost( "restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"])
+                                            // console.log("restaurant="+items[i]["rest"]+"&username="+user["username"]+"&product="+items[i]["itemName"]+"&price="+items[i]["cost"]+"&quantity="+items[i]["itemNo"])
                                         }
+                                        orderPost(x);
+                                        console.log(JSON.stringify(x));
                                     }}>Pay</button>
                                     </div>
                                 </div>
