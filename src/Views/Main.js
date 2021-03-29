@@ -475,7 +475,7 @@ export const Home = ( props ) => {
 
     useEffect(() => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burgers")
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burger")
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
     })
@@ -498,16 +498,19 @@ export const Home = ( props ) => {
                     <InputBase
                         placeholder="Search"
                         inputProps={{ 'aria-label': 'search' }}
+                        value="11111"
                     />
                     <IconButton type="submit" 
                     aria-label="search">
-                        <ArrowForwardIcon/>
+                        <a href="#menu-section">
+                            <ArrowForwardIcon style={{color:"#6c757d"}} onClick={()=>{}}/>
+                        </a>
                     </IconButton>                    
                 </Paper>
                 <p><u>Sign In</u> for your recent delivery address</p>
             </div>
         </div>
-        <div className="App">
+        <div className="App" id="menu-section">
         
             <div className="food-filter">
                 {/* <Filter setFilter={props.setFilter} sel={props.filter.sel} filter={props.filter.filter}/> */}
@@ -754,7 +757,7 @@ const Main = () => {
     useEffect(() => {
         dispatch(restMenuSlice.actions.removeMenu());
         console.log(menu);
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burgers")
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burger")
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
     })

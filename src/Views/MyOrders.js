@@ -29,9 +29,9 @@ const MyOrders = () => {
                             <div>1.McRib Meal</div>
                         </div>
                         <div className="col-sm-6 nxt-steps">
-                            <Link to="/rating"><div className="rate-food">Rate your Food</div></Link>
-                            <Link to="/restaurant"><div className="rate-food">View Store</div></Link>
-                            <Link to="/restaurant"><div className="reorder">Reorder</div></Link>
+                            <Link to="/rating"><div className="rate-food" style={{backgroundColor:"antiquewhite"}}>Rate your Food</div></Link>
+                            <Link to="/main"><div className="rate-food" style={{backgroundColor:"antiquewhite"}}>View Store</div></Link>
+                            <Link to="/main"><div className="reorder" style={{backgroundColor:"antiquewhite"}}>Reorder</div></Link>
                         </div>
                     </div>
                 </div>

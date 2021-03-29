@@ -214,7 +214,7 @@ export default function HeaderNext( props ) {
                             <Link to="/main"><MenuItem className={classes.navItem} onClick={handleClose}><img src={home} alt="home"/>&nbsp;&nbsp;<div className={classes.navText}>Home</div></MenuItem><hr/></Link>
                             <MenuItem className={classes.navItem} onClick={handleClose}><img src={pickup} alt="pick up"/>&nbsp;&nbsp;<div className={classes.navText}>Pick up</div></MenuItem><hr/>
                             <MenuItem className={classes.navItem} onClick={handleClose}><img src={offers} alt="offers"/>&nbsp;&nbsp;<div className={classes.navText}>Offers</div></MenuItem><hr/>
-                            <Link to="/myorders"><MenuItem className={classes.navItem} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;<div className={classes.navText}>My Orders</div></MenuItem></Link><hr/>
+                            <Link to="/myorders"><MenuItem className={classes.navItem} style={{backgroundColor:"antiquewhite"}} onClick={handleClose}><img src={myorders} alt="My orders"/>&nbsp;&nbsp;<div className={classes.navText}>My Orders</div></MenuItem></Link><hr/>
                             <MenuItem onClick={handleClose} className={classes.navItem}><img src={signout} alt="sign out"/>&nbsp;&nbsp;<div className={classes.navText} onClick={()=> {
                                
                                 Auth.signOut();

@@ -344,7 +344,9 @@ amplify-sign-out{
 /* Menu seperate page css */
 
 .menu-page-cont{
-  height: 2000px
+  /* height: 2000px; */
+  display: flex;
+  flex-direction: column;
 }
 .menu-name-sec{
   width: 100%;
@@ -361,7 +363,6 @@ amplify-sign-out{
 a:hover{
   text-decoration: none;
 }
-
 .App{
   padding: 0px 5% 0px 5%;
 }

@@ -91,9 +91,10 @@ const Ratings = () => {
 
     useEffect(() => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burgers")
+        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burger")
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
+        console.log(res.data);
     })
     .catch((err)=>{
         console.log("error:",err)
@@ -181,14 +182,14 @@ const Ratings = () => {
                         <h2>Ratings from others</h2><br/>
                         <h2 style={{color:"#E87803"}}>Example Burger</h2>
                         <p>$. American . Fast Food . Burger</p>
-                        <h4>{review["reviews"]["Example Burgers"]["Address"]["S"]}</h4>
+                        <h4>{review["reviews"]["Example Burger"]["Address"]["S"]}</h4>
                         {review["reviews"]["reviews"].map((r,i) => {
                             return <div className={classes.revCont}>
                                 <Card>
                                     <div className={classes.head}>
                                         <div>
                                             <h3>{r.Name["S"]}</h3>
-                                            <p>{r.Created_At}</p>
+                                            <p>{r.Created_At["S"]}</p>
                                         </div>
                                         <div className={classes.userRate}>
                                             <Rating

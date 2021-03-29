@@ -234,33 +234,58 @@ const RestaurantMenu = ({match}) => {
                         // else if(cm.pname === "Mole Poblano"){
                         //     url=m4;
                         // }
-                        return <Card className={classes.root}  onClick={()=>{
-                            if(cm.pname === "McRib Meal"  || cm.pname === "Horchata"){
-                                handleOpen();
-                                // console.log(cm,menu.restMenu[res][0]["name"])
-                                setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
-                            }
-                        }}>
-                            <div
-                             className={classes.details}
-                            >
-                                <CardContent 
-                                className={classes.content}
+                        if(cm.pname === "McRib Meal"  || cm.pname === "Horchata"){
+                            return <Card className={classes.root} style={{backgroundColor:"antiquewhite"}} onClick={()=>{
+                                // if(cm.pname === "McRib Meal"  || cm.pname === "Horchata"){
+                                    handleOpen();
+                                    // console.log(cm,menu.restMenu[res][0]["name"])
+                                    setClicked({...cm,restaurant:menu.restMenu[res][0]["name"]});
+                                // }
+                            }}>
+                                <div
+                                 className={classes.details}
                                 >
-                                    <Typography component="h5" variant="h5">
-                                        {cm.pname}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
-                                        {cm.cal}<br/>${cm.price}
-                                    </Typography>
-                                </CardContent>
-                            </div>
-                            <CardMedia
-                                className={classes.cover}
-                                image={url}
-                                title="media"
-                            />
-                        </Card>
+                                    <CardContent 
+                                    className={classes.content}
+                                    >
+                                        <Typography component="h5" variant="h5">
+                                            {cm.pname}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="textSecondary">
+                                            {cm.cal}<br/>${cm.price}
+                                        </Typography>
+                                    </CardContent>
+                                </div>
+                                <CardMedia
+                                    className={classes.cover}
+                                    image={url}
+                                    title="media"
+                                />
+                            </Card>
+                        }else{
+                            return <Card className={classes.root}>
+                                <div
+                                 className={classes.details}
+                                >
+                                    <CardContent 
+                                    className={classes.content}
+                                    >
+                                        <Typography component="h5" variant="h5">
+                                            {cm.pname}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="textSecondary">
+                                            {cm.cal}<br/>${cm.price}
+                                        </Typography>
+                                    </CardContent>
+                                </div>
+                                <CardMedia
+                                    className={classes.cover}
+                                    image={url}
+                                    title="media"
+                                />
+                            </Card>
+                        }
+                        
                     } )}
                 
                     </div>
