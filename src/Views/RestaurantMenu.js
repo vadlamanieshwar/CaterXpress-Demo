@@ -31,6 +31,7 @@ import m7 from '../Assets/img/m7.png';
 import m8 from '../Assets/img/m8.png';
 import Header from "../Default/Header";
 import HeaderNext from "../Default/HeaderNext";
+import urlConfig from "../urlConfig";
 
 const useStyles = makeStyles((theme) => ({
     menuBack: {
@@ -145,7 +146,7 @@ const RestaurantMenu = ({match}) => {
         }
         return new Promise((resolve, reject) => {
     
-         axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=" + q)
+         axios.get(urlConfig.RestaurantFoodGetAPI + q)
         .then(res => resolve(res.data))
         .catch((err)=>{
             console.log("error:",err)

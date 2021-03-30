@@ -2,6 +2,11 @@
 import itemSlice, { getItems } from "../store/slices/items";
 import cartSlice from "../store/slices/cart";
 import payDone from "../Assets/img/payDone.svg";
+import HeaderNext from "../Default/HeaderNext";
+import { getUser } from "../store/slices/user";
+import { getUserDetail } from "../store/slices/userDetail";
+import { getCart } from "../store/slices/cart";
+import urlConfig from "../urlConfig";
 
 // imports from downloads
 import { useSelector,  useDispatch } from "react-redux";
@@ -11,10 +16,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import HeaderNext from "../Default/HeaderNext";
-import { getUser } from "../store/slices/user";
-import { getUserDetail } from "../store/slices/userDetail";
-import { getCart } from "../store/slices/cart";
 import axios from 'axios';
 
 
@@ -51,7 +52,7 @@ const Payment = () => {
     const no = useSelector(getCart) || 0;
 
     const orderPost = (order) => {
-        axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/order', JSON.stringify(order))
+        axios.post(urlConfig.OrderPostAPI, JSON.stringify(order))
           .then(function (response) {
             console.log(response);
             // history.push("/main");

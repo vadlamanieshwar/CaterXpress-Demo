@@ -18,6 +18,7 @@ import reviewsSlice, { getReviews } from "../store/slices/reviews";
 import HeaderNext from "../Default/HeaderNext";
 import userDetailSlice, { getUserDetail } from "../store/slices/userDetail";
 import userSlice, { getUser } from "../store/slices/user";
+import urlConfig from "../urlConfig";
 
 const useStyles = makeStyles({
     root:{
@@ -91,7 +92,7 @@ const Ratings = () => {
 
     useEffect(() => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burger")
+        axios.get(urlConfig.RatingGetAPI)
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
         console.log(res.data);
@@ -102,11 +103,25 @@ const Ratings = () => {
     // console.log();
     }, [])
 
+    const callReview = () => {
+        axios.get(urlConfig.RatingGetAPI)
+        .then(res => {
+            dispatch(reviewsSlice.actions.addReviews(res.data));
+            console.log(res.data);
+        })
+        .catch((err)=>{
+            console.log("error:",err)
+        })
+    }
+
     const reviewPost = (r) => {
-        axios.post('https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating', r)
+        axios.post(urlConfig.RatingPostAPI, r)
           .then(function (response) {
             console.log(response);
-            history.push("/main");
+            // history.push("/main");
+            setComment("");
+            setValue(0);
+            // callReview();
           })
     }
 

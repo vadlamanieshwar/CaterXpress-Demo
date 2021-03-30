@@ -18,7 +18,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
 import filterSlice, { getFilter } from "../store/slices/filter";
 import selectedSlice, { getSelected } from "../store/slices/selected";
-
+import urlConfig from '../urlConfig';
 import ad1 from '../Assets/img/ad1.png';
 import ad2 from '../Assets/img/ad2.png';
 import option1 from '../Assets/img/option1.svg';
@@ -435,7 +435,7 @@ export async function fetchMenu(rest){
     }
     return new Promise((resolve, reject) => {
 
-     axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/food?restaurant_name=" + q)
+     axios.get(urlConfig.RestaurantFoodGetAPI + q)
     .then(res => resolve(res.data))
     })
     .catch((err)=>{
@@ -455,7 +455,7 @@ export async function fetchFilter(filter){
     }
     return new Promise((resolve, reject) => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/" + q)
+        axios.get(urlConfig.RestaurantByFilterGetAPI + q)
         .then(res => resolve(res.data))
         .catch((err)=>{
             console.log("error:",err)
@@ -475,7 +475,7 @@ export const Home = ( props ) => {
 
     useEffect(() => {
 
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burger")
+        axios.get(urlConfig.RatingGetAPI)
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
     })
@@ -757,7 +757,7 @@ const Main = () => {
     useEffect(() => {
         dispatch(restMenuSlice.actions.removeMenu());
         console.log(menu);
-        axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/rating?entity=Example%20Burger")
+        axios.get(urlConfig.RatingGetAPI)
     .then(res => {
         dispatch(reviewsSlice.actions.addReviews(res.data));
     })
