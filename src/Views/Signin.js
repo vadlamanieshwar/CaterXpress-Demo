@@ -37,6 +37,8 @@ function  Signin(){
     return  <div>
                 <Header/>
                 <div className={classes.wrap}>
+                    {/* Amplify components used for sign in and sign up 
+                    these components are used because of the need for custom design */}
                     <AmplifyAuthenticator>
                         <AmplifySignUp
                             headerText="Sign Up"
