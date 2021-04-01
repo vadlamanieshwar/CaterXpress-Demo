@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { IconButton, InputBase, Paper, Chip, List, ListItem, ListItemText, Drawer, Icon, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
+import axios from 'axios';
 
 import itemSlice, { getItems } from "../store/slices/items";
 import restMenuSlice, { getRestMenu } from "../store/slices/restMenu";
@@ -26,18 +27,35 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { useHistory } from "react-router-dom";
+import { CollectionsOutlined } from '@material-ui/icons';
 
 export function ComboBox() {
     const classes = useStyles();
     const history = useHistory();
+    const [opt,setOpt] = React.useState([]);
 
   return (
     <Autocomplete
       id="combo-box-demo"
       className={classes.comboBox}
-      options={restaurant}
+      options={opt}
       getOptionLabel={(option) => option.name}
+      onInputChange={(e,v,r)=>{
+          axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/search?prefix="+v)
+            .then(res => {
+                let x= Object.values(res.data)[0];
+                let o=[];
+                x.map((r,i)=>{
+                    o.push({name:r});
+                })
+                setOpt(o);
+            })
+            .catch((err)=>{
+                console.log("error:",err)
+            })
+      }}
       onChange={(event, newValue) => {
+          console.log(event,newValue);
             if(newValue !== null){
                 if(newValue.name === "Example Burger"){
                     history.push("/restaurant/Example Burger");
@@ -255,6 +273,10 @@ export default function HeaderNext( props ) {
                                 // className={classes.input}
                                 placeholder="Search"
                                 inputProps={{ 'aria-label': 'search' }}
+                                onChange={(e)=>{
+                                    console.log(e.target.value);
+
+                                }}
                             />
                             
                         </Paper> */}
