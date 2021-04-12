@@ -121,7 +121,7 @@ const Ratings = () => {
             // history.push("/main");
             setComment("");
             setValue(0);
-            // callReview();
+            callReview();
           })
     }
 
