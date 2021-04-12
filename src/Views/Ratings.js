@@ -204,7 +204,7 @@ const Ratings = () => {
                                     <div className={classes.head}>
                                         <div>
                                             <h3>{r.Name["S"]}</h3>
-                                            <p>{r.Created_At["S"]}</p>
+                                            {/* <p>{r.Created_At["S"]}</p> */}
                                         </div>
                                         <div className={classes.userRate}>
                                             <Rating
