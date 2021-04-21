@@ -28,6 +28,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { useHistory } from "react-router-dom";
 import { CollectionsOutlined } from '@material-ui/icons';
+import urlConfig from "../urlConfig";
 
 export function ComboBox() {
     const classes = useStyles();
@@ -41,7 +42,7 @@ export function ComboBox() {
       options={opt}
       getOptionLabel={(option) => option.name}
       onInputChange={(e,v,r)=>{
-          axios.get("https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com/alpha/restaurant/search?prefix="+v)
+          axios.get(urlConfig.SearchPostAPI+v)
             .then(res => {
                 let x= Object.values(res.data)[0];
                 let o=[];
