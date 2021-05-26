@@ -448,10 +448,10 @@ export async function fetchMenu(rest){
 export async function fetchFilter(filter){
     let q="";
     if(filter === "rating"){
-        q= "filter";
+        q= "by_rating";
     }
     else if( filter === "price" ){
-        q = "price"
+        q = "by_price"
     }
     return new Promise((resolve, reject) => {
 
