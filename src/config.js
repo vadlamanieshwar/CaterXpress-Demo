@@ -1,3 +1,6 @@
+// Update this file after your Amplify deployed:
+// Go to Cognito console userpool to get userPoolId and ClientId, update the parameters below correspondingly
+// Copy the amplifyapp id and replace the invokeUrl below. 
 window._config = {
     cognito: {
         userPoolId: 'us-east-1_o94MS7uKo', 
