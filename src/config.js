@@ -1,10 +1,10 @@
 window._config = {
     cognito: {
-        userPoolId: 'us-east-2_kSg0kBKz6', 
-        userPoolClientId: '1ahc62d56l5hg0lrpfejsaaa9o', 
-        region: 'us-east-2'
+        userPoolId: 'us-east-1_o94MS7uKo', 
+        userPoolClientId: '1ecr6cuh47pk3l468hvb3j6arh', 
+        region: 'us-east-1'
     },
     api: {
-        invokeUrl: 'https://master.d30yb4or234i1a.amplifyapp.com',
+        invokeUrl: 'https://master.d3bmggs9fwan3h.amplifyapp.com',
     }
 };
