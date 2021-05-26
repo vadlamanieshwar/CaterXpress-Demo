@@ -1,5 +1,5 @@
 let urlConfig = {
-    backend: "https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com"
+    backend: "https://8nmatnl44j.execute-api.us-east-1.amazonaws.com"
 }
 
 urlConfig.RatingGetAPI = urlConfig.backend + "/alpha/rating?entity=Example%20Burger";
