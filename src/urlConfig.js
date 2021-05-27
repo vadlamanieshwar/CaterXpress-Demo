@@ -1,4 +1,4 @@
-// Replace the https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com with your APIGateway Invoke URL except alpha"
+// Replace the https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com with your APIGateway Invoke URL except /alpha"
 let urlConfig = {
     backend: "https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com"
 }
