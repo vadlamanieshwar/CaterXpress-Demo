@@ -1,6 +1,6 @@
 // Replace the https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com with your APIGateway Invoke URL except /alpha"
 let urlConfig = {
-    backend: "https://f2w5o7vsrc.execute-api.us-east-2.amazonaws.com"
+    backend: "https://mopu3o2xt5.execute-api.us-east-1.amazonaws.com"
 }
 
 urlConfig.RatingGetAPI = urlConfig.backend + "/alpha/rating?entity=Example%20Burger";
